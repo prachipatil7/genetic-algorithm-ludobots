@@ -3,7 +3,30 @@ import pybullet_data
 import pyrosim.pyrosim as pyrosim
 import time
 import numpy as np
-import matplotlib.pyplot as plt
+
+# Set constants
+sim_steps = 1000
+motor_max_force = 50
+
+# Initialize arrays to store sensor values
+backLegSensorValues = np.zeros(sim_steps)
+frontLegSensorValues = np.zeros(sim_steps)
+
+# Create motor sin values
+x = np.linspace(0, 2*np.pi, num=sim_steps)
+
+backLegAmplitude = np.pi/3
+backLegFrequency = 10
+backLegPhaseOffset = 0
+backLegTargetAngles = backLegAmplitude * np.sin(backLegFrequency * x + backLegPhaseOffset)
+np.save('data/backLegTargetAngles.npy', backLegTargetAngles)
+
+frontLegAmplitude = np.pi/3
+frontLegFrequency = 10
+frontLegPhaseOffset = np.pi/4
+frontLegTargetAngles = frontLegAmplitude * np.sin(frontLegFrequency * x + frontLegPhaseOffset)
+np.save('data/frontLegTargetAngles.npy', frontLegTargetAngles)
+# exit()
 
 # Connect to the physics server and set the additional search path to the data path
 physicsClient = p.connect(p.GUI)
@@ -20,12 +43,8 @@ pyrosim.Prepare_To_Simulate(robotId)
 # Load the world SDF file
 p.loadSDF("world.sdf")
 
-# Initialize arrays to store sensor values
-backLegSensorValues = np.zeros(1000)
-frontLegSensorValues = np.zeros(1000)
-
 # Simulate 1000 steps
-for i in range(1000):
+for i in range(sim_steps):
     p.stepSimulation()
 
     # Record sensor values
@@ -36,24 +55,19 @@ for i in range(1000):
     pyrosim.Set_Motor_For_Joint(bodyIndex = robotId,
                                 jointName = "Torso_BackLeg",
                                 controlMode = p.POSITION_CONTROL,
-                                targetPosition = 0.0,
-                                maxForce = 500)
+                                targetPosition = backLegTargetAngles[i],
+                                maxForce = motor_max_force)
+    pyrosim.Set_Motor_For_Joint(bodyIndex = robotId,
+                                jointName = "Torso_FrontLeg",
+                                controlMode = p.POSITION_CONTROL,
+                                targetPosition = frontLegTargetAngles[i],
+                                maxForce = motor_max_force)
 
     time.sleep(1/2000)
 
 # Save the sensor values to numpy files
 np.save('data/backLegSensorValues.npy', backLegSensorValues)
 np.save('data/frontLegSensorValues.npy', frontLegSensorValues)
-
-# Load the sensor values from numpy files
-backLegSensorData = np.load('data/backLegSensorValues.npy')
-frontLegSensorData = np.load('data/frontLegSensorValues.npy')
-
-# Plot the sensor values
-plt.plot(backLegSensorData, label='Back Leg', linewidth=1.3)
-plt.plot(frontLegSensorData, label='Front Leg', linewidth=0.8)
-plt.legend(loc='upper right')
-plt.show()
 
 # Disconnect from the physics server
 p.disconnect()
