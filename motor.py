@@ -15,13 +15,13 @@ class MOTOR:
         self.phaseOffset = c.backLegPhaseOffset
         self.motorValues = self.amplitude * np.sin(self.frequency * c.x + self.phaseOffset)
 
-    def Set_Value(self, t, robotId):
+    def Set_Value(self, desiredAngle, robotId):
         pyrosim.Set_Motor_For_Joint(bodyIndex = robotId,
                             jointName = self.jointName,
                             controlMode = p.POSITION_CONTROL,
-                            targetPosition = self.motorValues[t],
+                            targetPosition = desiredAngle,
                             maxForce = c.motor_max_force)
-        if t+1 == c.sim_steps:
+        if desiredAngle+1 == c.sim_steps:
             self.Save_Values()
 
     def Save_Values(self):
