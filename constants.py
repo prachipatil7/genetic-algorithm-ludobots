@@ -1,6 +1,6 @@
 import numpy as np
 
-sim_steps = 1000
+sim_steps = 1500
 motor_max_force = 50
 sleep_time = 0
 gravity = -9.8
