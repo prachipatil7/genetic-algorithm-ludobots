@@ -4,6 +4,7 @@ sim_steps = 1000
 motor_max_force = 50
 sleep_time = 1/3000
 gravity = -9.8
+numberOfGenerations = 2
 
 # Create motor sin values
 x = np.linspace(0, 2*np.pi, num=sim_steps)
