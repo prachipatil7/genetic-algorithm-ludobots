@@ -21,7 +21,10 @@ class HILL_CLIMBER:
         self.child = copy.deepcopy(self.parent)
 
     def Mutate(self):
-        pass
+        self.child.Mutate()
+        print(self.parent.weights)
+        print(self.child.weights)
+        exit()
 
     def Select(self):
         pass
