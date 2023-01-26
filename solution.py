@@ -2,6 +2,7 @@ import numpy as np
 import pyrosim.pyrosim as pyrosim
 import os
 import random
+import time
 
 
 class SOLUTION:
@@ -12,7 +13,7 @@ class SOLUTION:
         self.Create_World()
         self.Create_Body()
         self.Create_Brain()
-        os.system("python3 simulate.py " + directOrGui)
+        os.system("python3 simulate.py " + directOrGui + " &")
         fit_file = open("data/fitness.txt", "r")
         fitness = fit_file.read()
         self.fitness = float(fitness)
