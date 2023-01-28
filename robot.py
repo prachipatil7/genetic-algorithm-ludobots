@@ -9,8 +9,8 @@ class ROBOT:
     def __init__(self, solutionID):
         self.sensors = {}
         self.motors = {}
-        self.nn = NEURAL_NETWORK(f"brain{solutionID}.nndf")
-        self.robotId = p.loadURDF(f"body{solutionID}.urdf")
+        self.nn = NEURAL_NETWORK(f"generation/brain{solutionID}.nndf")
+        self.robotId = p.loadURDF(f"generation/body{solutionID}.urdf")
         self.solutionId = solutionID
         # os.system(f"rm brain{solutionID}.nndf")
         # os.system(f"rm body{solutionID}.urdf")
@@ -43,7 +43,7 @@ class ROBOT:
         xCoordinateOfLinkZero = positionOfLinkZero[0]
         print(xCoordinateOfLinkZero)
 
-        fit_file = open(f"fitness{self.solutionId}.txt", "w")
+        fit_file = open(f"data/fitness{self.solutionId}.txt", "w")
         fit_file.write(str(xCoordinateOfLinkZero))
    
     def Think(self):

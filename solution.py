@@ -15,7 +15,7 @@ class SOLUTION:
         self.Create_Body()
         self.Create_Brain()
         os.system(f"python3 simulate.py {directOrGui} {self.myID} &")
-        fit_file = open(f"fitness{self.myID}.txt", "r")
+        fit_file = open(f"data/fitness{self.myID}.txt", "r")
         fitness = fit_file.read()
         self.fitness = float(fitness)
 
@@ -25,7 +25,7 @@ class SOLUTION:
         self.weights[row][col] = random.random() * 2 - 1
 
     def Create_World(self):
-        pyrosim.Start_SDF(f"world.sdf")
+        pyrosim.Start_SDF(f"generation/world.sdf")
 
         length, width, height = 1, 1, 1
         xpos, ypos, zpos = -3, 3, 0.5
@@ -36,7 +36,7 @@ class SOLUTION:
         pyrosim.End()
 
     def Create_Body(self):
-        pyrosim.Start_URDF(f"body{self.myID}.urdf")
+        pyrosim.Start_URDF(f"generation/body{self.myID}.urdf")
         cube = [1, 1, 1]
         pyrosim.Send_Cube(name=f"Torso", 
                        pos=[0, 0, 1.5] , 
@@ -65,7 +65,7 @@ class SOLUTION:
         pyrosim.End()
 
     def Create_Brain(self):
-        pyrosim.Start_NeuralNetwork(f"brain{self.myID}.nndf")
+        pyrosim.Start_NeuralNetwork(f"generation/brain{self.myID}.nndf")
 
         pyrosim.Send_Sensor_Neuron(name = 0 , linkName = "Torso")
         pyrosim.Send_Sensor_Neuron(name = 1 , linkName = "BackLeg")
