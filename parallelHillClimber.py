@@ -4,9 +4,11 @@ import copy
 
 class PARALLEL_HILL_CLIMBER:
     def __init__(self):
+        self.nextAvailableID = 0
         self.parents = {}
         for i in range(c.populationSize):
-            self.parents[i] = SOLUTION()
+            self.parents[i] = SOLUTION(self.nextAvailableID)
+            self.nextAvailableID += 1
 
     def Evolve(self):
         for key, parent in self.parents.items():
@@ -24,6 +26,8 @@ class PARALLEL_HILL_CLIMBER:
 
     def Spawn(self):
         self.child = copy.deepcopy(self.parent)
+        self.child.myID = self.nextAvailableID
+        self.nextAvailableID += 1
 
     def Mutate(self):
         self.child.Mutate()

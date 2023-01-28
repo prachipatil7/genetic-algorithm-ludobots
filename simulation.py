@@ -9,12 +9,12 @@ from world import WORLD
 from robot import ROBOT
 
 class SIMULATION:
-    def __init__(self, directOrGUI):
+    def __init__(self, directOrGUI, solutionID):
         if directOrGUI == "DIRECT":
             c.sleep_time = 0
             self.physicsClient = p.connect(p.DIRECT)
         elif directOrGUI == "GUI":
-            c.sleep_time = 1/1000
+            c.sleep_time = 0
             self.physicsClient = p.connect(p.GUI)
            
         
@@ -22,7 +22,7 @@ class SIMULATION:
         p.setGravity(0, 0, c.gravity)
 
         self.world = WORLD()
-        self.robot = ROBOT()
+        self.robot = ROBOT(solutionID)
 
     def Run(self):       
         # Simulate 1000 steps
