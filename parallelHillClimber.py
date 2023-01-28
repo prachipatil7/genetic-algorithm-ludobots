@@ -23,17 +23,18 @@ class PARALLEL_HILL_CLIMBER:
         # self.Show_Best()
 
     def Evolve_For_One_Generation(self):
-        pass
-        # self.Spawn()
+        self.Spawn()
         # self.Mutate()
         # self.child.Evaluate("DIRECT")
         # self.Print()
         # self.Select()
 
     def Spawn(self):
-        self.child = copy.deepcopy(self.parent)
-        self.child.myID = self.nextAvailableID
-        self.nextAvailableID += 1
+        self.children = {}
+        for key, parent in self.parents:
+            self.children[key] = copy.deepcopy(parent)
+            self.children[key].myID = self.nextAvailableID
+            self.nextAvailableID += 1
 
     def Mutate(self):
         self.child.Mutate()
