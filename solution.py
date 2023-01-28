@@ -10,14 +10,20 @@ class SOLUTION:
         self.weights = np.random.rand(3,2) * 2 - 1
         self.myID = ID
 
-    def Evaluate(self, directOrGui):
+    def Start_Simulation(self, directOrGui):
         self.Create_World()
         self.Create_Body()
         self.Create_Brain()
         os.system(f"python3 simulate.py {directOrGui} {self.myID} &")
+
+    def Wait_For_Simulation_To_End(self):
+        while not os.path.exists(f"data/fitness{self.myID}.txt"):
+            time.sleep(0.01)
         fit_file = open(f"data/fitness{self.myID}.txt", "r")
         fitness = fit_file.read()
         self.fitness = float(fitness)
+        os.system(f"rm data/fitness{self.myID}.txt")
+        print(self.fitness)
 
     def Mutate(self):
         row = random.randint(0,2)

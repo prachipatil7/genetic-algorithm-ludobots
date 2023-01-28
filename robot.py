@@ -12,8 +12,8 @@ class ROBOT:
         self.nn = NEURAL_NETWORK(f"generation/brain{solutionID}.nndf")
         self.robotId = p.loadURDF(f"generation/body{solutionID}.urdf")
         self.solutionId = solutionID
-        # os.system(f"rm brain{solutionID}.nndf")
-        # os.system(f"rm body{solutionID}.urdf")
+        os.system(f"rm generation/brain{solutionID}.nndf")
+        os.system(f"rm generation/body{solutionID}.urdf")
         pyrosim.Prepare_To_Simulate(self.robotId)
         self.Prepare_To_Sense()
         self.Prepare_To_Act()
@@ -43,8 +43,10 @@ class ROBOT:
         xCoordinateOfLinkZero = positionOfLinkZero[0]
         print(xCoordinateOfLinkZero)
 
-        fit_file = open(f"data/fitness{self.solutionId}.txt", "w")
+        fit_file = open(f"data/tmp{self.solutionId}.txt", "w")
         fit_file.write(str(xCoordinateOfLinkZero))
+
+        os.system(f"mv data/tmp{self.solutionId}.txt data/fitness{self.solutionId}.txt")
    
     def Think(self):
         self.nn.Update()
