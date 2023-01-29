@@ -8,7 +8,7 @@ import time
 
 class SOLUTION:
     def __init__(self, ID):
-        self.weights = np.random.rand(3,2) * 2 - 1
+        self.weights = np.random.rand(c.numSensorNeurons,c.numMotorNeurons) * 2 - 1
         self.myID = ID
         # print(f"Solution {self.myID} Created")
 
@@ -32,8 +32,8 @@ class SOLUTION:
         # print(self.fitness)
 
     def Mutate(self):
-        row = random.randint(0,2)
-        col = random.randint(0,1)
+        row = random.randint(0,c.numSensorNeurons-1)
+        col = random.randint(0,c.numMotorNeurons-1)
         self.weights[row][col] = random.random() * 2 - 1
 
     def Create_World(self):
@@ -153,9 +153,22 @@ class SOLUTION:
         pyrosim.Send_Sensor_Neuron(name = 0 , linkName = "Torso")
         pyrosim.Send_Sensor_Neuron(name = 1 , linkName = "BackLeg")
         pyrosim.Send_Sensor_Neuron(name = 2 , linkName = "FrontLeg")
+        pyrosim.Send_Sensor_Neuron(name = 3 , linkName = "LeftLeg")
+        pyrosim.Send_Sensor_Neuron(name = 4 , linkName = "RightLeg")
+        pyrosim.Send_Sensor_Neuron(name = 5 , linkName = "BackLeg2")
+        pyrosim.Send_Sensor_Neuron(name = 6 , linkName = "FrontLeg2")
+        pyrosim.Send_Sensor_Neuron(name = 7 , linkName = "LeftLeg2")
+        pyrosim.Send_Sensor_Neuron(name = 8 , linkName = "RightLeg2")
 
-        pyrosim.Send_Motor_Neuron( name = 3 , jointName = "Torso_BackLeg")
-        pyrosim.Send_Motor_Neuron( name = 4 , jointName = "Torso_FrontLeg")
+        pyrosim.Send_Motor_Neuron( name = 9 , jointName = "Torso_BackLeg")
+        pyrosim.Send_Motor_Neuron( name = 10 , jointName = "Torso_FrontLeg")
+        pyrosim.Send_Motor_Neuron( name = 11 , jointName = "Torso_LeftLeg")
+        pyrosim.Send_Motor_Neuron( name = 12 , jointName = "Torso_RightLeg")
+        pyrosim.Send_Motor_Neuron( name = 13 , jointName = "BackLeg_BackLeg2")
+        pyrosim.Send_Motor_Neuron( name = 14 , jointName = "FrontLeg_FrontLeg2")
+        pyrosim.Send_Motor_Neuron( name = 15 , jointName = "LeftLeg_LeftLeg2")
+        pyrosim.Send_Motor_Neuron( name = 16 , jointName = "RightLeg_RightLeg2")
+
 
         for curr_row in range(c.numSensorNeurons):
             for curr_col in range(c.numMotorNeurons):
