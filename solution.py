@@ -58,11 +58,11 @@ class SOLUTION:
                        parent= "Torso" , 
                        child = "FrontLeg" , 
                        type = "revolute", 
-                       position = [0.5,0,1])
+                       position = [0, 0.5, 1])
 
         pyrosim.Send_Cube(name=f"FrontLeg", 
-                pos= [0.5, 0, -0.5], 
-                size=cube)
+                pos= [0, 0.5, 0], 
+                size=[0.2, 1, 0.2])
 
         pyrosim.Send_Joint(name = "Torso_BackLeg",
                    parent= "Torso" , 
