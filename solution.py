@@ -50,6 +50,7 @@ class SOLUTION:
     def Create_Body(self):
         pyrosim.Start_URDF(f"generation/body{self.myID}.urdf")
         cube = [1, 1, 1]
+        leg = [0.2, 1, 0.2]
         pyrosim.Send_Cube(name=f"Torso", 
                        pos=[0, 0, 1] , 
                         size=cube)
@@ -62,17 +63,17 @@ class SOLUTION:
 
         pyrosim.Send_Cube(name=f"FrontLeg", 
                 pos= [0, 0.5, 0], 
-                size=[0.2, 1, 0.2])
+                size=leg)
 
         pyrosim.Send_Joint(name = "Torso_BackLeg",
                    parent= "Torso" , 
                    child = "BackLeg" , 
                    type = "revolute", 
-                   position = [-0.5,0,1])
+                   position = [0, -0.5, 1])
 
         pyrosim.Send_Cube(name=f"BackLeg", 
-            pos= [-0.5, 0, -0.5], 
-            size=cube)
+            pos= [0, -0.5, 0], 
+            size=leg)
     
         pyrosim.End()
 
