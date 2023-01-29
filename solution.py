@@ -59,7 +59,8 @@ class SOLUTION:
                        parent= "Torso" , 
                        child = "FrontLeg" , 
                        type = "revolute", 
-                       position = [0, 0.5, 1])
+                       position = [0, 0.5, 1],
+                       jointAxis = "1 0 0")
 
         pyrosim.Send_Cube(name=f"FrontLeg", 
                 pos= [0, 0.5, 0], 
@@ -69,7 +70,8 @@ class SOLUTION:
                    parent= "Torso" , 
                    child = "BackLeg" , 
                    type = "revolute", 
-                   position = [0, -0.5, 1])
+                   position = [0, -0.5, 1],
+                   jointAxis = "1 0 0")
 
         pyrosim.Send_Cube(name=f"BackLeg", 
             pos= [0, -0.5, 0], 
