@@ -41,8 +41,6 @@ class ROBOT:
         stateOfLinkZero = p.getLinkState(self.robotId,0)        
         positionOfLinkZero = stateOfLinkZero[0]
         xCoordinateOfLinkZero = positionOfLinkZero[0]
-        print(xCoordinateOfLinkZero)
-
         fit_file = open(f"data/tmp{self.solutionId}.txt", "w")
         fit_file.write(str(xCoordinateOfLinkZero))
 
