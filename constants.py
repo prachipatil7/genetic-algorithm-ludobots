@@ -1,14 +1,15 @@
 import numpy as np
 
 sim_steps = 1500
-motor_max_force = 50
+motor_max_force = 100
 sleep_time = 0
 gravity = -9.8
-numberOfGenerations = 10
+numberOfGenerations = 50
 populationSize = 10
-numSensorNeurons = 9
-numMotorNeurons = 8
-motorJointRange = 0.2
+numSensorNeurons = 6
+numMotorNeurons = 5
+motorJointRange = 0.8
+numSteps = 10
 
 # Create motor sin values
 x = np.linspace(0, 2*np.pi, num=sim_steps)
