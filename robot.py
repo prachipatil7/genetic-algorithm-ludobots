@@ -5,9 +5,11 @@ import os
 from sensor import SENSOR
 from motor import MOTOR
 import constants as c
+import numpy as np
 
 class ROBOT:
     def __init__(self, solutionID):
+        print(solutionID)
         self.sensors = {}
         self.motors = {}
         self.nn = NEURAL_NETWORK(f"generation/brain{solutionID}.nndf")
@@ -39,11 +41,20 @@ class ROBOT:
                 self.motors[jointName].Set_Value(desiredAngle, self.robotId)
 
     def Get_Fitness(self):
-        stateOfLinkZero = p.getLinkState(self.robotId,0)        
+        print("Fitness:")
+        headID = pyrosim.linkNamesToIndices["Head"]
+        stateOfLinkZero = p.getLinkState(self.robotId,headID)   
+        print(stateOfLinkZero)     
         positionOfLinkZero = stateOfLinkZero[0]
-        xCoordinateOfLinkZero = positionOfLinkZero[0]
+        xCoor = positionOfLinkZero[0]
+        yCoor = positionOfLinkZero[1]
+        zCoor = positionOfLinkZero[2]
+        # fitness = (zCoor-1.5)
+        fitness = xCoor * -3
+        fitness -= abs(yCoor) 
+
         fit_file = open(f"data/tmp{self.solutionId}.txt", "w")
-        fit_file.write(str(xCoordinateOfLinkZero))
+        fit_file.write(str(fitness))
 
         os.system(f"mv data/tmp{self.solutionId}.txt data/fitness{self.solutionId}.txt")
    

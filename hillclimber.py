@@ -9,6 +9,7 @@ class HILL_CLIMBER:
     def Evolve(self):
         self.parent.Evaluate("GUI")
         for currentGeneration in range(c.numberOfGenerations):
+            print("GENERATION ", currentGeneration+1)
             self.Evolve_For_One_Generation()
         self.Show_Best()
 
