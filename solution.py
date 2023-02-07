@@ -9,7 +9,7 @@ import time
 
 class SOLUTION:
     def __init__(self, ID):
-        self.weights = np.random.rand(c.numSensorNeurons,c.numMotorNeurons) * 2 - 1
+        self.weights = c.weights #np.random.rand(c.numSensorNeurons,c.numMotorNeurons) * 2 - 1
         self.myID = ID
         # print(f"Solution {self.myID} Created")
 
@@ -39,14 +39,14 @@ class SOLUTION:
 
     def Create_World(self):
         pyrosim.Start_SDF("generation/world.sdf")
-        xpos, ypos, zpos = (c.numSteps+1)/-2 - 5.5, 0, 0.25
+        xpos, ypos, zpos = -1*c.numSteps - 2, 0, c.stepHeight/2
         for i in range(c.numSteps):
-            length, width, height = 2*(c.numSteps-i), c.stairWidth, 0.5
+            length, width, height = 2*(c.numSteps-i), c.stairWidth, c.stepHeight
             pyrosim.Send_Cube(name=f"Box{i}", 
                             pos=[xpos, ypos, zpos] , 
                             size=[length, width, height],
                             mass = 50.0)
-            zpos += 0.5
+            zpos += c.stepHeight
             xpos -= 1
         pyrosim.End()
 
@@ -57,14 +57,14 @@ class SOLUTION:
         leg3 = [0.2, 0.2, 1]
         pyrosim.Send_Cube(name=f"Torso", 
                        pos=[0, 0, 1] , 
-                        size=[2, 1, 1])
+                        size=[2, 1, 0.5])
 
         pyrosim.Send_Joint(name = "Torso_FrontRightLeg",
                        parent= "Torso" , 
                        child = "FrontRightLeg" , 
                        type = "revolute", 
                        position = [-0.5, 0.5, 1],
-                       jointAxis = "0 1 0")
+                       jointAxis = "1 1 1")
 
         pyrosim.Send_Cube(name=f"FrontRightLeg", 
                 pos= [0, 0.5, 0], 
@@ -86,7 +86,7 @@ class SOLUTION:
                child = "BackRightLeg" , 
                type = "revolute", 
                position = [0.5, 0.5, 1],
-               jointAxis = "0 1 0")
+               jointAxis = "1 1 1")
         pyrosim.Send_Cube(name=f"BackRightLeg", 
                 pos= [0, 0.5, 0], 
                 size=leg)
@@ -107,7 +107,7 @@ class SOLUTION:
                child = "FrontLeftLeg" , 
                type = "revolute", 
                position = [-0.5, -0.5, 1],
-               jointAxis = "0 1 0")
+               jointAxis = "1 1 1")
         pyrosim.Send_Cube(name=f"FrontLeftLeg", 
                 pos= [0, -0.5, 0], 
                 size=leg)
@@ -125,7 +125,7 @@ class SOLUTION:
             child = "BackLeftLeg" , 
             type = "revolute", 
             position = [0.5, -0.5, 1],
-            jointAxis = "0 1 0")
+            jointAxis = "1 1 1")
         pyrosim.Send_Cube(name=f"BackLeftLeg", 
                 pos= [0, -0.5, 0], 
                 size=leg)
@@ -142,7 +142,7 @@ class SOLUTION:
                 parent= "Torso" , 
                 child = "Head" , 
                 type = "revolute", 
-                position = [-1, 0, 1.5],
+                position = [-1, 0, 1.25],
                 jointAxis = "0 1 0")
         pyrosim.Send_Cube(name=f"Head", 
                 pos= [0, 0, 0], 

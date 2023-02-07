@@ -49,9 +49,9 @@ class ROBOT:
         xCoor = positionOfLinkZero[0]
         yCoor = positionOfLinkZero[1]
         zCoor = positionOfLinkZero[2]
-        fitness = (zCoor-1.5) * 3
-        fitness += xCoor * -3
-        fitness -= abs(yCoor) * 2 
+        # fitness = (zCoor-1.5)
+        fitness = xCoor * -3
+        fitness -= abs(yCoor) 
 
         fit_file = open(f"data/tmp{self.solutionId}.txt", "w")
         fit_file.write(str(fitness))
