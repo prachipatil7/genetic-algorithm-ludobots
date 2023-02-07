@@ -41,14 +41,17 @@ class ROBOT:
                 self.motors[jointName].Set_Value(desiredAngle, self.robotId)
 
     def Get_Fitness(self):
-        stateOfLinkZero = p.getLinkState(self.robotId,0)        
+        print("Fitness:")
+        headID = pyrosim.linkNamesToIndices["Head"]
+        stateOfLinkZero = p.getLinkState(self.robotId,headID)   
+        print(stateOfLinkZero)     
         positionOfLinkZero = stateOfLinkZero[0]
         xCoor = positionOfLinkZero[0]
         yCoor = positionOfLinkZero[1]
         zCoor = positionOfLinkZero[2]
-        fitness = (zCoor-1) * 2
+        fitness = (zCoor-1.5) * 3
         fitness += xCoor * -3
-        fitness -= abs(yCoor)
+        fitness -= abs(yCoor) * 2 
 
         fit_file = open(f"data/tmp{self.solutionId}.txt", "w")
         fit_file.write(str(fitness))
