@@ -14,10 +14,10 @@ class PARALLEL_HILL_CLIMBER:
             self.nextAvailableID += 1
 
     def Evolve(self):
-        self.Evaluate(self.parents, "DIRECT")
-        for currentGeneration in range(c.numberOfGenerations):
-            self.Evolve_For_One_Generation()
-        self.Show_Best()
+        self.Evaluate(self.parents, "GUI")
+        # for currentGeneration in range(c.numberOfGenerations):
+            # self.Evolve_For_One_Generation()
+        # self.Show_Best()
 
     def Evolve_For_One_Generation(self):
         self.Spawn()
