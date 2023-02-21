@@ -90,7 +90,7 @@ class SOLUTION:
         
     def Create_Body(self):
         pyrosim.Start_URDF(f"generation/body{self.myID}.urdf")
-        self.numTorsoLinks = random.randint(3, 7)
+        self.numTorsoLinks = random.randint(3, 5)
 
         root_link = self.create_root_link()
         self.create_root_joint(root_link)

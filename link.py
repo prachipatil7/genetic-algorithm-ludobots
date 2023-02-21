@@ -50,7 +50,7 @@ class LINK:
             parent = self
             for i in range(0,branch_length):
                 child = LINK(f"{self.IDNum}-{i}", parent, branch_direction)
-                child.create(liklihood_of_branching-0.1)
+                child.create(liklihood_of_branching-0.7)
                 self.children.append(child)
                 parent = child
             
