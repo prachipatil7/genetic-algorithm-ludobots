@@ -24,21 +24,23 @@ class PARALLEL_HILL_CLIMBER:
         self.Spawn()
         self.Mutate()
         for key in self.parents:
-            self.Evaluate(self.parents[key].child_solutions, "DIRECT")
+            self.Evaluate(self.children[key], "DIRECT")
         self.Print()
         self.Select()
 
     def Spawn(self):
+        self.children = {}
         for key, parent in self.parents.items():
+            self.children[key] = {}
             for i in range(c.childrenPerParent):
                 child = copy.deepcopy(parent)
                 child.myID = self.nextAvailableID
                 self.nextAvailableID += 1
-                self.parents[key].child_solutions[i] = child
+                self.children[key][i] = child
 
     def Mutate(self):
         for key in self.parents:
-            for childkey, child in self.parents[key].child_solutions.items():
+            for childkey, child in self.children[key].items():
                 child.Mutate()
 
     def Evaluate(self, solutions, mode):
@@ -49,14 +51,14 @@ class PARALLEL_HILL_CLIMBER:
 
     def Print(self):
         for key in self.parents:
-            for childkey, child in self.parents[key].child_solutions.items():
+            for childkey, child in self.children[key].items():
                 print(key, self.parents[key].fitness, child.fitness)
         print()
 
     def Select(self):
         for key in self.parents:
             best_child = self.parents[key]
-            for childkey, child in self.parents[key].child_solutions.items():
+            for childkey, child in self.children[key].items():
                 if best_child.fitness > child.fitness:
                     best_child = child
         self.parents[key] = best_child

@@ -1,15 +1,15 @@
 import numpy as np
 
-sim_steps = 1500
+sim_steps = 500
 motor_max_force = 80
 sleep_time = 0
 gravity = -9.8
 numberOfGenerations = 10
-populationSize = 1
+populationSize = 3
 motorJointRange = 0.5
 maxLinks = 10
 maxLinkSize = 1
-childrenPerParent = 2
+childrenPerParent = 3
 directionDict = {
     "up": [0,0,1],
     "down": [0,0,-1],
