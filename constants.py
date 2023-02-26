@@ -1,11 +1,11 @@
 import numpy as np
 
 sim_steps = 1500
-motor_max_force = 100
+motor_max_force = 80
 sleep_time = 0
 gravity = -9.8
-numberOfGenerations = 1
-populationSize = 10
+numberOfGenerations = 10
+populationSize = 1
 motorJointRange = 0.5
 maxLinks = 10
 maxLinkSize = 1

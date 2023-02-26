@@ -9,10 +9,15 @@ from link import LINK
 class SOLUTION:
     def __init__(self, ID):
         self.myID = ID
+
+        self.child_solutions = []
+        
         self.numTorsoLinks = random.randint(2, c.maxLinks)
         self.sensorNeurons = []
         self.motorNeurons = []
         self.links = []
+        self.linkDict = {}
+
 
     def Start_Simulation(self, directOrGui):
         self.Create_World()
@@ -32,8 +37,8 @@ class SOLUTION:
         os.system(f"rm data/fitness{self.myID}.txt")
 
     def Mutate(self):
-        row = random.randint(0,c.numSensorNeurons-1)
-        col = random.randint(0,c.numMotorNeurons-1)
+        row = random.randint(0,self.numSensorNeurons-1)
+        col = random.randint(0,self.numMotorNeurons-1)
         self.weights[row][col] = random.random() * 2 - 1
 
     def Create_World(self):
@@ -47,8 +52,9 @@ class SOLUTION:
 
         pyrosim.End()
 
-    def create_root_link(self):
-        root_link = LINK(0)
+    def create_root_link(self, root_link=None):
+        if not root_link:
+            root_link = LINK(0)
         position = root_link.dimensions * np.array([0, 0, 0.5])
         position[2] += 5
         pyrosim.Send_Cube(name=root_link.ID, 
@@ -70,8 +76,9 @@ class SOLUTION:
             jointAxis = "1 0 1")
         self.motorNeurons.append(f"Link0_Link1")
 
-    def create_first_relative_joint(self):
-        link1 = LINK(1)
+    def create_first_relative_joint(self, link1=None):
+        if not link1:
+            link1 = LINK(1)
         position = link1.dimensions * np.array([0, 0.5, 0])
         pyrosim.Send_Cube(name=link1.ID, 
             pos=position, 
@@ -86,33 +93,51 @@ class SOLUTION:
             if link.isSensor:
                 self.sensorNeurons.append(link.ID)
         for link in lst:
+            self.linkDict[link.ID]= link
             self.record_sensor_neurons(link.children)
+            
         
     def Create_Body(self):
         pyrosim.Start_URDF(f"generation/body{self.myID}.urdf")
-        self.numTorsoLinks = random.randint(3, 5)
+        if len(self.links)==0:
+            self.numTorsoLinks = random.randint(3, 5)
 
-        root_link = self.create_root_link()
-        self.create_root_joint(root_link)
-        parent = self.create_first_relative_joint()
-        self.links.append(parent)
-        for i in range(2, self.numTorsoLinks):
-            child = LINK(str(i), parent, "right")
-            child.create(3/self.numTorsoLinks)
-            self.motorNeurons.append(child.jointID)
-            self.links.append(child)
-            parent = child
+            root_link = self.create_root_link()
+            self.create_root_joint(root_link)
+            parent = self.create_first_relative_joint()
+            self.links.append(parent)
+            for i in range(2, self.numTorsoLinks):
+                child = LINK(str(i), parent, "right")
+                child.create(3/self.numTorsoLinks)
+                self.motorNeurons.append(child.jointID)
+                self.links.append(child)
+                parent = child
+            self.record_sensor_neurons(self.links)
+            # print("sensor names:", self.sensorNeurons)
+            print("link names:", list(self.linkDict.keys()))
+        else:
+            self.linkNames = list(self.linkDict.keys())
+            self.linkNames.remove("Link0")
+            self.create_root_link(self.linkDict["Link0"])
+            self.create_root_joint(self.linkDict["Link0"])
+            self.linkNames.remove("Link1")
+            self.create_first_relative_joint(self.linkDict["Link1"])
+            for linkName in self.linkNames:
+                # print("Recreating", self.linkDict[linkName].ID)
+                self.linkDict[linkName].create(-1, first_pass=False)
 
         pyrosim.End()
         
-        self.record_sensor_neurons(self.links)
-        print("sensor names:", self.sensorNeurons)
+        
+        
+        
+        
 
     def Create_Brain(self):
         self.numSensorNeurons = len(self.sensorNeurons)
         self.numMotorNeurons = len(self.motorNeurons)
         self.weights = np.random.rand(self.numSensorNeurons,self.numMotorNeurons) * 2 - 1
-        print("synapse_weights: ", self.weights)
+        # print("synapse_weights: ", self.weights)
         pyrosim.Start_NeuralNetwork(f"generation/brain{self.myID}.nndf")
 
         i=0
