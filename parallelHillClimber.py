@@ -23,20 +23,23 @@ class PARALLEL_HILL_CLIMBER:
     def Evolve_For_One_Generation(self):
         self.Spawn()
         self.Mutate()
-        self.Evaluate(self.children, "DIRECT")
+        for key in self.parents:
+            self.Evaluate(self.parents[key].child_solutions, "DIRECT")
         self.Print()
         self.Select()
 
     def Spawn(self):
-        self.children = {}
         for key, parent in self.parents.items():
-            self.children[key] = copy.deepcopy(parent)
-            self.children[key].myID = self.nextAvailableID
-            self.nextAvailableID += 1
+            for i in range(c.childrenPerParent):
+                child = copy.deepcopy(parent)
+                child.myID = self.nextAvailableID
+                self.nextAvailableID += 1
+                self.parents[key].child_solutions[i] = child
 
     def Mutate(self):
-        for key, child in self.children.items():
-            child.Mutate()
+        for key in self.parents:
+            for childkey, child in self.parents[key].child_solutions.items():
+                child.Mutate()
 
     def Evaluate(self, solutions, mode):
         for key, solution in solutions.items():
@@ -46,13 +49,18 @@ class PARALLEL_HILL_CLIMBER:
 
     def Print(self):
         for key in self.parents:
-            print(key, self.parents[key].fitness, self.children[key].fitness)
+            for childkey, child in self.parents[key].child_solutions.items():
+                print(key, self.parents[key].fitness, child.fitness)
         print()
 
     def Select(self):
         for key in self.parents:
-            if self.parents[key].fitness > self.children[key].fitness:
-                self.parents[key] = self.children[key]
+            best_child = self.parents[key]
+            for childkey, child in self.parents[key].child_solutions.items():
+                if best_child.fitness > child.fitness:
+                    best_child = child
+        self.parents[key] = best_child
+            
 
     def Show_Best(self):
         min_fitness = 0

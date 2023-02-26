@@ -10,8 +10,8 @@ class SOLUTION:
     def __init__(self, ID):
         self.myID = ID
 
-        self.child_solutions = []
-        
+        self.child_solutions = {}
+
         self.numTorsoLinks = random.randint(2, c.maxLinks)
         self.sensorNeurons = []
         self.motorNeurons = []

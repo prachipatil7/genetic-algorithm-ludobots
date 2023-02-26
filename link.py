@@ -8,7 +8,6 @@ class LINK:
     def __init__(self, ID, parent=None, direction="right"):
         self.IDNum = ID
         self.ID = f"Link{ID}"
-        # print("Initializing", self.ID)
         self.parent = parent
         self.directionString = direction
         self.linkDirectionVector = np.array(c.directionDict[direction])
@@ -25,12 +24,10 @@ class LINK:
         self.initialize_color()
         
     def create(self, liklihood_of_branching, first_pass=True):
-        # print("     my parent is", self.parent.ID)
         self.isTurning = self.parent.directionString != self.directionString
         if first_pass:
             self.jointDirectionVector += self.parent.linkDirectionVector
         self.jointPos = self.parent.dimensions * self.jointDirectionVector * 0.5
-        # print("     my joint direction is", self.jointDirectionVector)
         self.linkPos = self.dimensions * self.linkDirectionVector * 0.5
         self.jointAxis = np.array2string(np.absolute(1-self.linkDirectionVector))
 
@@ -43,7 +40,6 @@ class LINK:
             type = "revolute", 
             position = self.jointPos,
             jointAxis = self.jointAxis)
-        # print(f"name = {self.jointID}, parent= {self.parent.ID} , child = {self.ID} , position = {self.jointPos}, jointAxis = {self.jointAxis})")
         pyrosim.Send_Cube(name=f"{self.ID}",
             pos=self.linkPos, 
             size=self.dimensions,
@@ -56,7 +52,6 @@ class LINK:
             potential_branch_directions.remove(c.directionInverseDict[self.directionString])
             branch_direction = random.choice(potential_branch_directions)
             branch_length = random.randint(1,5)
-            # print(branch_length, branch_direction)
             parent = self
             for i in range(0,branch_length):
                 child = LINK(f"{self.IDNum}-{i}", parent, branch_direction)

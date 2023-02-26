@@ -9,6 +9,7 @@ populationSize = 1
 motorJointRange = 0.5
 maxLinks = 10
 maxLinkSize = 1
+childrenPerParent = 2
 directionDict = {
     "up": [0,0,1],
     "down": [0,0,-1],
