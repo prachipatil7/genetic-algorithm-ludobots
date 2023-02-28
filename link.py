@@ -12,14 +12,9 @@ class LINK:
         self.directionString = direction
         self.linkDirectionVector = np.array(c.directionDict[direction])
         self.jointDirectionVector = np.copy(self.linkDirectionVector)
-        if False:
-             self.dimensions = [random.uniform(0.25, self.parent.dimensions[0]), 
-                                random.uniform(0.25, self.parent.dimensions[1]), 
-                                random.uniform(0.25, self.parent.dimensions[2])]
-        else:
-            self.dimensions = [random.uniform(0.25, c.maxLinkSize)*0.8, 
-                                random.uniform(0.25, c.maxLinkSize), 
-                                random.uniform(0.25, c.maxLinkSize)*0.5]
+        self.dimensions = [random.uniform(0.25, c.maxLinkSize)*0.8, 
+                           random.uniform(0.25, c.maxLinkSize), 
+                           random.uniform(0.25, c.maxLinkSize)*0.5]
         self.children = []
         self.initialize_color()
         

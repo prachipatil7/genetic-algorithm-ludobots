@@ -14,10 +14,10 @@ class SIMULATION:
             c.sleep_time = 0
             self.physicsClient = p.connect(p.DIRECT)
         elif directOrGUI == "GUI":
-            c.sleep_time = 0
+            c.sleep_time = 1/1000
             self.physicsClient = p.connect(p.GUI)
            
-        
+        p.configureDebugVisualizer(p.COV_ENABLE_GUI, 0)
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
         p.setGravity(0, 0, c.gravity)
 

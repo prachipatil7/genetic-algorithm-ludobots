@@ -5,6 +5,8 @@ import os
 import random
 import time
 from link import LINK
+import copy
+
 
 class SOLUTION:
     def __init__(self, ID):
@@ -20,6 +22,7 @@ class SOLUTION:
         self.Create_World()
         self.Create_Body()
         self.Create_Brain()
+        # os.system(f"python3 simulate.py {directOrGui} {self.myID} > 1")
         os.system(f"python3 simulate.py {directOrGui} {self.myID} 2&>1")
 
     def Wait_For_Simulation_To_End(self):
@@ -33,19 +36,49 @@ class SOLUTION:
         self.fitness = float(fitness)
         os.system(f"rm data/fitness{self.myID}.txt")
 
-    def Mutate(self):
+    def MutateWeights(self):
+        self.mutation = "change weights"
         row = random.randint(0,self.numSensorNeurons-1)
         col = random.randint(0,self.numMotorNeurons-1)
         self.weights[row][col] = random.random() * 2 - 1
 
+    def AddLink(self):
+        self.mutation = "add link"
+        parentOfNewLinkName = random.choice([link for link in self.linkNames if len(self.linkDict[link].children)<2])
+        parentOfNewLink = self.linkDict[parentOfNewLinkName]
+        potential_link_directions = list(c.directionDict.keys())
+        potential_link_directions.remove(parentOfNewLink.directionString)
+        potential_link_directions.remove(c.directionInverseDict[parentOfNewLink.directionString])
+        link_direction = random.choice(potential_link_directions)
+        newLink = LINK(f"{parentOfNewLink.IDNum}-0", parentOfNewLink, link_direction)
+        newLink.jointDirectionVector += newLink.parent.linkDirectionVector
+        parentOfNewLink.children.append(newLink)
+        self.linkDict[newLink.ID] = newLink
+
+    def MutateBody(self):
+        self.AddLink()
+        if random.choice([True, False]):
+            self.mutation = "change link"
+            linkToChange = random.choice(self.linkNames)
+            newLink = copy.deepcopy(self.linkDict[linkToChange])
+            newLink.dimensions *= np.absolute(newLink.linkDirectionVector)
+            newLink.dimensions = [d if d!=0 else random.uniform(0.25, c.maxLinkSize) for d in newLink.dimensions]                                                                         
+            newLink.initialize_color()
+            self.linkDict[linkToChange] = newLink
+            if random.choice([True, False]):
+                self.AddLink()
+        else:
+            self.AddLink()
+
+
     def Create_World(self):
         pyrosim.Start_SDF(f"generation/world.sdf")
 
-        length, width, height = 1, 1, 1
-        xpos, ypos, zpos = -3, 3, 0.5
-        pyrosim.Send_Cube(name=f"Box", 
-                          pos=[xpos, ypos, zpos] , 
-                          size=[length, width, height])
+        # length, width, height = 1, 1, 1
+        # xpos, ypos, zpos = -3, 3, 0.5
+        # pyrosim.Send_Cube(name=f"Box", 
+                        #   pos=[xpos, ypos, zpos] , 
+                        #   size=[length, width, height])
 
         pyrosim.End()
 
@@ -53,7 +86,7 @@ class SOLUTION:
         if not root_link:
             root_link = LINK(0)
         position = root_link.dimensions * np.array([0, 0, 0.5])
-        position[2] += 5
+        position[2] += 2
         pyrosim.Send_Cube(name=root_link.ID, 
             pos=position, 
             size=root_link.dimensions,
@@ -64,7 +97,7 @@ class SOLUTION:
 
     def create_root_joint(self, root_link):
         position = root_link.dimensions * np.array([0, 0.5, 0.5])
-        position[2] += 5
+        position[2] += 2
         pyrosim.Send_Joint(name = f"Link0_Link1",
             parent= f"Link0" , 
             child = f"Link1" , 
@@ -111,7 +144,8 @@ class SOLUTION:
                 parent = child
             self.record_sensor_neurons(self.links)
             # print("sensor names:", self.sensorNeurons)
-            print("link names:", list(self.linkDict.keys()))
+            # print("link names:", list(self.linkDict.keys()))
+            self.linkNames = list(self.linkDict.keys())
         else:
             self.linkNames = list(self.linkDict.keys())
             self.linkNames.remove("Link0")
@@ -120,14 +154,9 @@ class SOLUTION:
             self.linkNames.remove("Link1")
             self.create_first_relative_joint(self.linkDict["Link1"])
             for linkName in self.linkNames:
-                # print("Recreating", self.linkDict[linkName].ID)
                 self.linkDict[linkName].create(-1, first_pass=False)
 
         pyrosim.End()
-        
-        
-        
-        
         
 
     def Create_Brain(self):

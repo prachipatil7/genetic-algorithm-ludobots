@@ -13,8 +13,8 @@ class ROBOT:
         self.nn = NEURAL_NETWORK(f"generation/brain{solutionID}.nndf")
         self.robotId = p.loadURDF(f"generation/body{solutionID}.urdf")
         self.solutionId = solutionID
-        os.system(f"rm generation/brain{solutionID}.nndf")
-        os.system(f"rm generation/body{solutionID}.urdf")
+        # os.system(f"rm generation/brain{solutionID}.nndf")
+        # os.system(f"rm generation/body{solutionID}.urdf")
         pyrosim.Prepare_To_Simulate(self.robotId)
         self.Prepare_To_Sense()
         self.Prepare_To_Act()
