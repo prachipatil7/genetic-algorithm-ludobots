@@ -1,4 +1,4 @@
 # ludobots
 cs366: artificial life -- r/ludobots project
 
-Go to branch p-morphologies for the explanation for Assignment 6!
+Go to branch r-evolvedbodies for the explanation for Assignment 8!
