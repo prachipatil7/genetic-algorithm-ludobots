@@ -4,6 +4,7 @@ import copy
 import os
 from matplotlib import pyplot as plt
 import pandas as pd
+import random
 
 class PARALLEL_HILL_CLIMBER:
     def __init__(self):
@@ -53,10 +54,13 @@ class PARALLEL_HILL_CLIMBER:
     def Mutate(self):
         for key in self.parents:
             for childkey, child in self.children[key].items():
-                if childkey < c.childrenPerParent/2:
+                mutationType = random.randint(1,3)
+                if mutationType==1:
                     child.MutateWeights()
-                else:
+                elif mutationType==2:
                     child.MutateBody()
+                elif mutationType==3:
+                    child.AddLink()
 
     def Evaluate(self, solutions, mode):
         for key, solution in solutions.items():
@@ -79,7 +83,7 @@ class PARALLEL_HILL_CLIMBER:
             if self.parents[key].fitness > best_child.fitness:
                 self.parents[key] = best_child
             self.epochMetrics[key].append(self.parents[key].fitness)
-            self.Save_Body_Brain("Best", self.parents[key].myID, key)
+            # self.Save_Body_Brain("Best", self.parents[key].myID, key)
             
     def Show_Best(self):
         best_parent = self.parents[0]
@@ -89,7 +93,7 @@ class PARALLEL_HILL_CLIMBER:
             curr_parent.Start_Simulation("GUI")
             curr_parent.Wait_For_Simulation_To_End()
         # best_parent.Start_Simulation("GUI")
-        self.Save_Body_Brain("Best", best_parent.myID, "Final")
+        # self.Save_Body_Brain("Best", best_parent.myID, "Final")
 
     def Plot_Epochs(self):
         x = list(range(c.numberOfGenerations))
@@ -100,12 +104,12 @@ class PARALLEL_HILL_CLIMBER:
             plt.plot(x,y)
         plt.savefig('save/FitnessCurve.png')
 
-        df = pd.read_csv("data/epochMetrics.csv")
-        new_col = self.epochMetrics[0]
-        if df.shape: col_index = df.shape[1] + 1
-        else: col_index = 0
-        df[col_index] = new_col
-        df.to_csv("data/epochMetrics.csv", index=False)
+        # df = pd.read_csv("data/epochMetrics.csv")
+        # new_col = self.epochMetrics[0]
+        # if df.shape: col_index = df.shape[1] + 1
+        # else: col_index = 0
+        # df[col_index] = new_col
+        # df.to_csv("data/epochMetrics.csv", index=False)
 
 
         

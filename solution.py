@@ -22,7 +22,6 @@ class SOLUTION:
         self.Create_World()
         self.Create_Body()
         self.Create_Brain()
-        # os.system(f"python3 simulate.py {directOrGui} {self.myID} > 1")
         os.system(f"python3 simulate.py {directOrGui} {self.myID} 2&>1")
 
     def Wait_For_Simulation_To_End(self):
@@ -56,19 +55,13 @@ class SOLUTION:
         self.linkDict[newLink.ID] = newLink
 
     def MutateBody(self):
-        self.AddLink()
-        if random.choice([True, False]):
-            self.mutation = "change link"
-            linkToChange = random.choice(self.linkNames)
-            newLink = copy.deepcopy(self.linkDict[linkToChange])
-            newLink.dimensions *= np.absolute(newLink.linkDirectionVector)
-            newLink.dimensions = [d if d!=0 else random.uniform(0.25, c.maxLinkSize) for d in newLink.dimensions]                                                                         
-            newLink.initialize_color()
-            self.linkDict[linkToChange] = newLink
-            if random.choice([True, False]):
-                self.AddLink()
-        else:
-            self.AddLink()
+        self.mutation = "change link"
+        linkToChange = random.choice(self.linkNames)
+        newLink = copy.deepcopy(self.linkDict[linkToChange])
+        newLink.dimensions *= np.absolute(newLink.linkDirectionVector)
+        newLink.dimensions = [d if d!=0 else random.uniform(0.25, c.maxLinkSize) for d in newLink.dimensions]                                                                         
+        newLink.initialize_color()
+        self.linkDict[linkToChange] = newLink
 
 
     def Create_World(self):
