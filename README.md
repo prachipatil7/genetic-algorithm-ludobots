@@ -43,6 +43,7 @@ Here is a diagram showing the process of evolving a population of 5 for a single
 
 ## Results of Evolution
 In the plots below, I have two different evolutionary runs of 5 species each over 100 generations. As you can see, each "species" starts out with a different fitness and evolves differently based on random chance. They make a step-like pattern when no children are able to surpass the fitness of the parent for many generations. 
+
 ![FitnessCurve](https://user-images.githubusercontent.com/62350419/221757458-add89842-d41c-45c5-a476-14af8a483695.png)
 ![FitnessCurve-1](https://user-images.githubusercontent.com/62350419/221757471-bdc18f50-c95b-4098-81d5-23cfecc3a0ac.png)
 
