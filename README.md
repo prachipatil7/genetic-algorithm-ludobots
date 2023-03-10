@@ -1,5 +1,5 @@
 # CS_396: Artificial Life - Final Project (The Scientist)
-cs366: artificial life -- r/ludobots project
+cs396: artificial life -- r/ludobots project
 
 ## Background
 
