@@ -7,30 +7,35 @@ import pandas as pd
 import random
 
 class PARALLEL_HILL_CLIMBER:
-    def __init__(self):
+    def __init__(self, seedID, seedType):
         os.system("rm generation/brain*.nndf")
         os.system("rm generation/body*.urdf")
         os.system("rm data/fitness*.txt")
-        os.system("rm -R save/")
-        os.system("mkdir save")
+        self.seedID = seedID
+        self.seedType = seedType
         self.nextAvailableID = 0
         self.parents = {}
         self.epochMetrics = {}
+        self.bodySizeMetrics = {}
         for i in range(c.populationSize):
-            self.parents[i] = SOLUTION(self.nextAvailableID)
+            self.parents[i] = SOLUTION(self.nextAvailableID, self.seedType)
             self.nextAvailableID += 1
             self.epochMetrics[i] = []
+            self.bodySizeMetrics[i] = [0,0,0,0]
+            #[initial size, initial fitness, final size, final fitness]
 
     def Evolve(self):
-        self.Evaluate(self.parents, "GUI")
+        self.Evaluate(self.parents, "DIRECT")
         for key in self.parents:
+            self.bodySizeMetrics[key][0] = len(self.parents[key].linkDict)
+            self.bodySizeMetrics[key][1] = self.parents[key].fitness
             self.Save_Body_Brain("First", self.parents[key].myID, key)
         for currentGeneration in range(c.numberOfGenerations):
             os.system("rm generation/brain*.nndf")
             os.system("rm generation/body*.urdf")
             print(f"------GENERATION {currentGeneration+1}-------")
             self.Evolve_For_One_Generation()
-        self.Show_Best()
+        self.Save_Best()
         self.Plot_Epochs()
 
     def Evolve_For_One_Generation(self):
@@ -82,42 +87,37 @@ class PARALLEL_HILL_CLIMBER:
                     best_child = curr_child
             if self.parents[key].fitness > best_child.fitness:
                 self.parents[key] = best_child
+                self.Save_Body_Brain("Best", self.parents[key].myID, key)
             self.epochMetrics[key].append(self.parents[key].fitness)
-            # self.Save_Body_Brain("Best", self.parents[key].myID, key)
-            
-    def Show_Best(self):
+             
+    def Save_Best(self):
         best_parent = self.parents[0]
         for key, curr_parent in self.parents.items():
             if curr_parent.fitness < best_parent.fitness:
                 best_parent = curr_parent
-            curr_parent.Start_Simulation("GUI")
-            curr_parent.Wait_For_Simulation_To_End()
-        # best_parent.Start_Simulation("GUI")
-        # self.Save_Body_Brain("Best", best_parent.myID, "Final")
+            self.bodySizeMetrics[key][2] = len(curr_parent.linkDict)
+            self.bodySizeMetrics[key][3] = curr_parent.fitness
+            # curr_parent.Start_Simulation("GUI")
+            
 
     def Plot_Epochs(self):
         x = list(range(c.numberOfGenerations))
         for species in self.epochMetrics:
             y = [y*-1 for y in self.epochMetrics[species]]
-            # print(len(x), x)
-            # print(len(y), y)
             plt.plot(x,y)
-        plt.savefig('save/FitnessCurve.png')
+        plt.savefig(f'save/{self.seedID}FitnessCurve.png')
+        plt.cla()
 
-        # df = pd.read_csv("data/epochMetrics.csv")
-        # new_col = self.epochMetrics[0]
-        # if df.shape: col_index = df.shape[1] + 1
-        # else: col_index = 0
-        # df[col_index] = new_col
-        # df.to_csv("data/epochMetrics.csv", index=False)
+        df = pd.DataFrame.from_dict(self.epochMetrics, orient="columns")
+        df.to_csv(f"save/epochMetrics_{self.seedType}{self.seedID}.csv")
 
-
-        
+        df = pd.DataFrame.from_dict(self.bodySizeMetrics, orient="index", columns=["initial size", "initial fitness", "final size", "final fitness"])
+        df.to_csv(f"save/bodySizeMetrics_{self.seedType}{self.seedID}.csv")
 
 
     def Save_Body_Brain(self, fileName, solutionID, speciesID):
-        os.system(f"cp generation/body{solutionID}.urdf save/{fileName}{speciesID}Body.urdf >2")
-        os.system(f"cp generation/brain{solutionID}.nndf save/{fileName}{speciesID}Brain.nndf >2")
+        os.system(f"cp generation/body{solutionID}.urdf save/{self.seedType}{self.seedID}_{fileName}{speciesID}Body.urdf >2")
+        os.system(f"cp generation/brain{solutionID}.nndf save/{self.seedType}{self.seedID}_{fileName}{speciesID}Brain.nndf >2")
 
 
 

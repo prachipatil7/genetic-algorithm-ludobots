@@ -9,8 +9,9 @@ import copy
 
 
 class SOLUTION:
-    def __init__(self, ID):
+    def __init__(self, ID, seedType):
         self.myID = ID
+        self.seedType = seedType
         self.numTorsoLinks = random.randint(2, c.maxLinks)
         self.sensorNeurons = []
         self.motorNeurons = []
@@ -37,8 +38,11 @@ class SOLUTION:
 
     def MutateWeights(self):
         self.mutation = "change weights"
-        row = random.randint(0,self.numSensorNeurons-1)
-        col = random.randint(0,self.numMotorNeurons-1)
+        row = 0
+        col = 0
+        if self.numSensorNeurons > 2:
+            row = random.randint(0,self.numSensorNeurons-1)
+            col = random.randint(0,self.numMotorNeurons-1)
         self.weights[row][col] = random.random() * 2 - 1
 
     def AddLink(self):
@@ -77,7 +81,7 @@ class SOLUTION:
 
     def create_root_link(self, root_link=None):
         if not root_link:
-            root_link = LINK(0)
+            root_link = LINK(0, isSensor=True)
         position = root_link.dimensions * np.array([0, 0, 0.5])
         position[2] += 2
         pyrosim.Send_Cube(name=root_link.ID, 
@@ -123,15 +127,15 @@ class SOLUTION:
     def Create_Body(self):
         pyrosim.Start_URDF(f"generation/body{self.myID}.urdf")
         if len(self.links)==0:
-            self.numTorsoLinks = random.randint(3, 5)
-
+            self.numTorsoLinks = random.randint(3, 4)
             root_link = self.create_root_link()
             self.create_root_joint(root_link)
             parent = self.create_first_relative_joint()
             self.links.append(parent)
+            liklihoodOfBranching= 0 if self.seedType == "snake" else 3/self.numTorsoLinks
             for i in range(2, self.numTorsoLinks):
                 child = LINK(str(i), parent, "right")
-                child.create(3/self.numTorsoLinks)
+                child.create(liklihoodOfBranching)
                 self.motorNeurons.append(child.jointID)
                 self.links.append(child)
                 parent = child

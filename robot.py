@@ -46,7 +46,9 @@ class ROBOT:
             xCoordinateOfLink = positionOfLink[0]
             xCoors.append(xCoordinateOfLink)
         # print(xCoordinateOfLinkZero)
+        print(xCoors)
         fitness = sum(xCoors)/len(xCoors)
+        print(fitness)
         fit_file = open(f"data/tmp{self.solutionId}.txt", "w")
         fit_file.write(str(fitness))
 

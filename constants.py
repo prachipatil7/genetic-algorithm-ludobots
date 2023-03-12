@@ -1,11 +1,12 @@
-sim_steps = 2500
+sim_steps = 2000
 motor_max_force = 80
 sleep_time = 0
 gravity = -9.8
 
-numberOfGenerations = 100
-populationSize = 1
+numberOfGenerations = 500
+populationSize = 10
 childrenPerParent = 1
+numberOfSeeds = 10
 
 motorJointRange = 0.5
 maxLinks = 10

@@ -5,7 +5,7 @@ import numpy as np
 
 
 class LINK:
-    def __init__(self, ID, parent=None, direction="right"):
+    def __init__(self, ID, parent=None, direction="right", isSensor=False):
         self.IDNum = ID
         self.ID = f"Link{ID}"
         self.parent = parent
@@ -16,7 +16,7 @@ class LINK:
                            random.uniform(0.25, c.maxLinkSize), 
                            random.uniform(0.25, c.maxLinkSize)*0.5]
         self.children = []
-        self.initialize_color()
+        self.initialize_color(forceTrue=isSensor)
         
     def create(self, liklihood_of_branching, first_pass=True):
         self.isTurning = self.parent.directionString != self.directionString
@@ -54,10 +54,8 @@ class LINK:
                 self.children.append(child)
                 parent = child
             
-
-    
-    def initialize_color(self):
-        self.isSensor = random.choice([True, False])
+    def initialize_color(self, forceTrue=False):
+        self.isSensor = random.choice([True, False]) or forceTrue
         if self.isSensor:
             self.linkColorDims = "0 1.0 0 1.0"
             self.linkColorName = "Green"
