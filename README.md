@@ -61,10 +61,10 @@ In order to peform mutations and simulate inheritance, we need a way of encoding
 Below are some examples of how these encodings can vary between different bots:
 | Description | Snake Example | Branching Example |
 | --- | --- | --- |
-Bot | <img width="294" alt="Screen Shot 2023-03-14 at 17 05 50" src="https://user-images.githubusercontent.com/62350419/225156563-f1f5604d-9f24-465d-ba68-e1c83ab9b4af.png">| |
+Bot | <img width="294" alt="Screen Shot 2023-03-14 at 17 05 50" src="https://user-images.githubusercontent.com/62350419/225156563-f1f5604d-9f24-465d-ba68-e1c83ab9b4af.png">|<img width="261" alt="Screen Shot 2023-03-14 at 17 34 05" src="https://user-images.githubusercontent.com/62350419/225157357-9e2bf882-d286-4bf1-bf85-998c58c17975.png">|
 Body Encoding |<img width="158" alt="Screen Shot 2023-03-14 at 17 08 23" src="https://user-images.githubusercontent.com/62350419/225156195-761086de-a089-4499-9e38-983645089267.png">| |
 Brain Encoding |<img width="263" alt="Screen Shot 2023-03-14 at 17 27 45" src="https://user-images.githubusercontent.com/62350419/225156272-595f84b1-7a5a-4285-b594-2d38330c6cc0.png">| |
-Brain Weights | [[-0.45354025 -0.83160303]<br>[ 0.05263387 -0.15952745]<br>[ 0.26243147  0.55974003]<br>[-0.44464739  0.137477  ]]| |
+Brain Weights | [[-0.45354025 -0.83160303]<br>[ 0.05263387 -0.15952745]<br>[ 0.26243147  0.55974003]<br>[-0.44464739  0.137477  ]]|[[-0.56025373 -0.50558607]<br>[ 0.72651333 -0.84895842]<br>[-0.32092425 -0.30712119]<br>[-0.86294653  0.08219737]<br>[ 0.07716849  0.77850244]<br>[ 0.82613659  0.47865511]]|
 
 ### Mutating Bodies and Brains
 
