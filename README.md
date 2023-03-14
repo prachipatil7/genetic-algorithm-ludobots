@@ -26,7 +26,7 @@ Because the morphologies are randomly generated at times, I had to make sure tha
 ![ezgif com-optimize](https://user-images.githubusercontent.com/62350419/225100376-5d9d6a29-3ff2-47ed-a286-910ff500efd4.gif)
 
 ## The Algorithms
-Between each simulation, we need to keep track of the creatures' morphologies and behaviors, while also making beneficial changes to optimize for a certain goal. In this section, I will detail the ways that the algorithm encodes and modiefies the bots. 
+Between each simulation, we need to keep track of the creatures' morphologies and behaviors, while also making beneficial changes to optimize for a certain goal. In this section, I will detail the ways that the algorithm encodes and modifies the bots. 
 ### Creating Initial Random Bodies
 Each round of evolution starts out with 10 randomly generated bodies. In some cases, the bodies are 1 dimensional snakes with no branching, and in others, they are 3 dimensional complex forms with branching. Here is how both of these types of inital morphologies are generated:
 #### Snake Bodies
