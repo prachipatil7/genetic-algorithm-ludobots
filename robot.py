@@ -7,11 +7,19 @@ from motor import MOTOR
 import constants as c
 
 class ROBOT:
-    def __init__(self, solutionID):
+    def __init__(self, solutionID, nn_path=None, body_path=None):
         self.sensors = {}
         self.motors = {}
-        self.nn = NEURAL_NETWORK(f"generation/brain{solutionID}.nndf")
-        self.robotId = p.loadURDF(f"generation/body{solutionID}.urdf")
+        self.nn = 0
+        self.robotId = 0
+        if nn_path:
+            self.nn = NEURAL_NETWORK(nn_path)
+        else:
+            self.nn = NEURAL_NETWORK(f"generation/brain{solutionID}.nndf")
+        if body_path:
+            self.robotId = p.loadURDF(body_path)
+        else:
+            self.robotId = p.loadURDF(f"generation/body{solutionID}.urdf")
         self.solutionId = solutionID
         # os.system(f"rm generation/brain{solutionID}.nndf")
         # os.system(f"rm generation/body{solutionID}.urdf")

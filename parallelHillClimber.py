@@ -25,7 +25,7 @@ class PARALLEL_HILL_CLIMBER:
             #[initial size, initial fitness, final size, final fitness]
 
     def Evolve(self):
-        self.Evaluate(self.parents, "DIRECT")
+        self.Evaluate(self.parents, "GUI")
         for key in self.parents:
             self.bodySizeMetrics[key][0] = len(self.parents[key].linkDict)
             self.bodySizeMetrics[key][1] = self.parents[key].fitness
@@ -101,13 +101,13 @@ class PARALLEL_HILL_CLIMBER:
             
 
     def Plot_Epochs(self):
+        return
         x = list(range(c.numberOfGenerations))
         for species in self.epochMetrics:
             y = [y*-1 for y in self.epochMetrics[species]]
             plt.plot(x,y)
         plt.savefig(f'save/{self.seedID}FitnessCurve.png')
         plt.cla()
-
         df = pd.DataFrame.from_dict(self.epochMetrics, orient="columns")
         df.to_csv(f"save/epochMetrics_{self.seedType}{self.seedID}.csv")
 
@@ -116,6 +116,7 @@ class PARALLEL_HILL_CLIMBER:
 
 
     def Save_Body_Brain(self, fileName, solutionID, speciesID):
+        return
         os.system(f"cp generation/body{solutionID}.urdf save/{self.seedType}{self.seedID}_{fileName}{speciesID}Body.urdf >2")
         os.system(f"cp generation/brain{solutionID}.nndf save/{self.seedType}{self.seedID}_{fileName}{speciesID}Brain.nndf >2")
 

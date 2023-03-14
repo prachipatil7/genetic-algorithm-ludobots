@@ -25,7 +25,6 @@ class SIMULATION:
         self.robot = ROBOT(solutionID)
 
     def Run(self):       
-        # Simulate 1000 steps
         for t in range(c.sim_steps):
             p.stepSimulation()
             self.robot.Sense(t)
