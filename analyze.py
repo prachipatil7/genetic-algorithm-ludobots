@@ -7,11 +7,11 @@ import glob
 def get_csv_files(extension):
     snake_dfs = []
     random_dfs = []
-    for file_path in glob.glob(os.path.join("save/", f'*{extension}*snake*.csv')):
+    for file_path in glob.glob(os.path.join("results/", f'*{extension}*snake*.csv')):
         if os.path.isfile(file_path):
             df = pd.read_csv(file_path)
             snake_dfs.append(df.iloc[:, 1:])
-    for file_path in glob.glob(os.path.join("save/", f'*{extension}*random*.csv')):
+    for file_path in glob.glob(os.path.join("results/", f'*{extension}*random*.csv')):
         if os.path.isfile(file_path):
             df = pd.read_csv(file_path)
             random_dfs.append(df.iloc[:, 1:])
@@ -97,7 +97,7 @@ def scatter_plot(x_metric, y_metric):
     # Extract the initial size and final fitness columns from the dataframes
     x1 = data[x_metric.lower()]
     y1 = data[y_metric.lower()] * -1
-    x_ticks = np.array(range(max(x1)))
+    x_ticks = np.array(range(int(min(x1)), int(max(x1))))
     m1, b1 = np.polyfit(x1, y1, 1)
     
     # Create the scatter plot
@@ -148,4 +148,18 @@ def stats_table():
     # Print the table
     print(table)
 
-stats_table()
+def find_best():
+    a, b = get_csv_files('epochMetrics')
+    cols = []
+    dfs = a + b
+    for df in dfs:
+        cols.append(df.iloc[-1].values.argmin())
+    print( cols)
+
+
+find_best()
+
+
+
+
+

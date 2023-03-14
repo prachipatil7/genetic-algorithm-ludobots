@@ -9,7 +9,7 @@ from world import WORLD
 from robot import ROBOT
 
 class SIMULATION:
-    def __init__(self, directOrGUI, solutionID):
+    def __init__(self, directOrGUI, solutionID, robotPath=None):
         if directOrGUI == "DIRECT":
             c.sleep_time = 0
             self.physicsClient = p.connect(p.DIRECT)
@@ -22,7 +22,12 @@ class SIMULATION:
         p.setGravity(0, 0, c.gravity)
 
         self.world = WORLD()
-        self.robot = ROBOT(solutionID)
+        if robotPath and robotPath != "-1":
+            print(f"ROBOT PATH {robotPath}")
+            self.robot = ROBOT(solutionID, nn_path=robotPath+"Brain.nndf", body_path=robotPath+"Body.urdf")
+        elif robotPath=="-1":
+            print(f"ROBOT NOPATH {robotPath}")
+            self.robot = ROBOT(solutionID)
 
     def Run(self):       
         for t in range(c.sim_steps):
@@ -35,5 +40,10 @@ class SIMULATION:
     def Get_Fitness(self):
         self.robot.Get_Fitness()
 
+    def Disconnect(self):
+        p.disconnect()
+        print("disconnected")
+
     def __del__(self):
         p.disconnect()
+        print("disconnected")

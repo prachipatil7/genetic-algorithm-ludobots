@@ -30,6 +30,7 @@ class PARALLEL_HILL_CLIMBER:
             self.bodySizeMetrics[key][0] = len(self.parents[key].linkDict)
             self.bodySizeMetrics[key][1] = self.parents[key].fitness
             self.Save_Body_Brain("First", self.parents[key].myID, key)
+            self.Save_Body_Brain("Best", self.parents[key].myID, key)
         for currentGeneration in range(c.numberOfGenerations):
             os.system("rm generation/brain*.nndf")
             os.system("rm generation/body*.urdf")
@@ -116,7 +117,6 @@ class PARALLEL_HILL_CLIMBER:
 
 
     def Save_Body_Brain(self, fileName, solutionID, speciesID):
-        return
         os.system(f"cp generation/body{solutionID}.urdf save/{self.seedType}{self.seedID}_{fileName}{speciesID}Body.urdf >2")
         os.system(f"cp generation/brain{solutionID}.nndf save/{self.seedType}{self.seedID}_{fileName}{speciesID}Brain.nndf >2")
 

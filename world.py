@@ -1,7 +1,11 @@
 import pybullet as p
+import pybullet_data
+
 
 class WORLD:
-    def __init__(self):
+    def __init__(self, path=None):
         self.planeId = p.loadURDF("plane.urdf")
-        p.loadSDF("generation/world.sdf")
-
+        if path:
+            p.loadSDF(path)
+        else:
+            p.loadSDF("generation/world.sdf")
