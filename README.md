@@ -1,6 +1,4 @@
-# CS_396: Artificial Life
-Final Project (The Scientist)
-
+# Final Project (The Scientist)
 Over the course of 9 weeks, I have simulated and evolved motor behavior in simple organisms as well as added my own modifications to create and evolve random morphologies. In this process, I have noticed a correlation betweeen body size and final fitness, which I set out to investigate further in this study. 
 
 [10 second teaser gif]
