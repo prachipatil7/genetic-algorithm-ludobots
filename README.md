@@ -42,11 +42,22 @@ Prompts will guide you through how to run different parts of the program. Here a
 
 Feel free to play around with the simulations as much as you like! <br>
 ## Hypothesis
-
+Okay, back to the experiment. Since it seems like the starting body is some indicator of how effective evolution will be, I will be testing the following hypotheses:
 1. **It is more efficient to start off with a simple body and let the algorithm evolve its appendages, rather than starting out with a complex body with many parts.**
 2. **Simpler bodies have higher fitness overall.**
 
+This experiment could be important for determining more effective seeds for evolutionary algorithms. Even if the goal is to evolve complex behavior, it could be more beneficial for the algorithm to generate the complexity, rather than giving it an already-complex form to optimize. 
+
+The experiment is inspired by a phenomenon from the natural world. Simple organisms, such as beetles, worms, and even bacteria, have much more diversity than all mammals combined, and certainly more than humans or horses or tigers alone. This makes me think that there are many more beneficial mutations available to simple organisms than to complex ones, which is where this diversity is able to come from. The graph below shows the breakdown of different organism groups. Notice the preference for simpler organisms. I will see if this phenomenon applies to artificial life as well. <br>
+![image](https://user-images.githubusercontent.com/62350419/225126240-c7bafc0e-9861-4847-8135-4766f1eb02f1.png)
+<a href="https://www.researchgate.net/figure/Diversity-of-life-Percentages-are-based-on-the-estimated-total-number-of-living-species_fig1_278022190"><img src="https://www.researchgate.net/profile/Leif-Nett/publication/278022190/figure/fig1/AS:652250036838400@1532519935117/Diversity-of-life-Percentages-are-based-on-the-estimated-total-number-of-living-species.png" alt="Diversity of life. Percentages are based on the estimated total number of living species."/></a>
+
+Secondly, 
+
+[Diagram]
+
 ## Experiment
+
 
 ## Brains and Bodies
 
