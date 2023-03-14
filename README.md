@@ -10,16 +10,6 @@ cs396: artificial life -- r/ludobots project
 pip install -r requirements.txt
 ```
 
-## Simulation Count
-| Population Size | Number of Generations | Total Simulations | Total Time (mm:ss)
-| --- | --- | --- | --- |
-| 1 | 100 | 100 | 01:23 |
-| 5 | 20 | 100 | 01:28 |
-| 10 | 10 | 100 | 01:44 |
-| 10 | 50 | 500 | 10:17 |
-
-## Physics
-
 ## Hypothesis
 
 1. **It is more efficient to start off with a simple body and let the algorithm evolve its appendages, rather than starting out with a complex body with many parts.**
@@ -53,6 +43,16 @@ Box Plot
 ## Further Study
 
 ## Discussion
+
+## Simulation Count
+| Population Size | Number of Generations | Total Simulations | Total Time (mm:ss)
+| --- | --- | --- | --- |
+| 1 | 100 | 100 | 01:23 |
+| 5 | 20 | 100 | 01:28 |
+| 10 | 10 | 100 | 01:44 |
+| 10 | 50 | 500 | 10:17 |
+
+## Physics
 
 ## Acknowledgements
 Thanks to r/ludobots and pyrosim and pybullet for making this project possible.
