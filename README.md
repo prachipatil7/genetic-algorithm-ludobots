@@ -25,15 +25,31 @@ Because the morphologies are randomly generated at times, I had to make sure tha
 *Here is a new robot being built in midair, then moving on the plane:* <br>
 ![ezgif com-optimize](https://user-images.githubusercontent.com/62350419/225100376-5d9d6a29-3ff2-47ed-a286-910ff500efd4.gif)
 
-## The Algorithm
+## The Algorithms
 Between each simulation, we need to keep track of the creatures' morphologies and behaviors, while also making beneficial changes to optimize for a certain goal. In this section, I will detail the ways that the algorithm encodes and modiefies the bots. 
 ### Creating Initial Random Bodies
+Each round of evolution starts out with 10 randomly generated bodies. In some cases, the bodies are 1 dimensional snakes with no branching, and in others, they are 3 dimensional complex forms with branching. Here is how both of these types of inital morphologies are generated:
 #### Snake Bodies
+Snake bodies are generated with the following algorithm:
+1. Randomly choose a length (3-4 links)
+2. For each link, keep track of the position of the parent link to calculate the position of the current link. Each link has random dimensions
+
+Here is a diagram that details the formation of snake morphologies: <br>
+[Diagram]
 #### Branching Bodies
+Branching bodies are generated with the following algorithm:
+1. Randomly choose a length (3-4 links)
+2. For each link, keep track of the position of the parent link to calculate the position of the current link. Each link has random dimensions. 
+3. For every link that is sent, a coin is flipped to decide if a new branch will extend from that link. A coin is also flipped for every link to decide if it is contains a sensor neuron or not.
+4. If creating a new branch, randomly decide the length of that branch and the direction in which it will extend. The new branch must extend along a different axis than the branch that is currently being built.
+5. Again, every link on this new branch also has the possibility of being the start of yet another branch. However, the liklihood of branching goes down depending on how deeply we have branched already.
 
-### Encoding Bodies
+Here is a diagram that details the formation of branching morphologies: <br>
+![Ludobots](https://user-images.githubusercontent.com/62350419/225134174-c9be17a4-c1a0-4709-b28b-c4b4843bbc87.gif) <br>
+To view each individiual step, go <a href="https://docs.google.com/presentation/d/1CSIokwxJHgnQZs9IMYF87uhRMNs9nSXAmwOiGw9uZ0Y/edit?usp=sharing">here</a>
 
-### Encoding Brains
+### Encoding Brains and Bodies
+In 
 
 ### Mutating Bodies and Brains
 
@@ -51,7 +67,7 @@ The experiment is inspired by a phenomenon from the natural world. Simple organi
 
 In the field of Artificial Life, this experiment could be important for determining more effective seeds for evolutionary algorithms. Even if the goal is to evolve complex behavior, it could be more beneficial for the algorithm to generate the complexity, rather than giving it an already-complex form to optimize. 
 
-!!!![Diagram]
+[Diagram]
 
 ### Method
 
