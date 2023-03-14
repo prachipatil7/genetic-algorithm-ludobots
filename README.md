@@ -35,8 +35,8 @@ Snake bodies are generated with the following algorithm:
 2. For each link, keep track of the position of the parent link to calculate the position of the current link. Each link has random dimensions
 
 Here is a diagram that details the formation of snake morphologies: <br>
-![Ludobots_Snake](https://user-images.githubusercontent.com/62350419/225140250-4a880f36-d427-4ae9-a922-b38d4e771782.gif)
-To view each individiual step, go <a href="https://docs.google.com/presentation/d/1QkJtwHdYPnikls9h9UAA4g4Sdw-xNyHXVw-yOt0FwVg/edit?usp=sharing">here</a>
+![Ludobots_Snake](https://user-images.githubusercontent.com/62350419/225141500-292f0bdb-655d-422a-ae92-4091a635dbfa.gif) <br>
+To view each individiual step, go <a href="https://docs.google.com/presentation/d/1QkJtwHdYPnikls9h9UAA4g4Sdw-xNyHXVw-yOt0FwVg/edit?usp=sharing">here</a>.
 
 #### Branching Bodies
 Branching bodies are generated with the following algorithm:
@@ -48,7 +48,7 @@ Branching bodies are generated with the following algorithm:
 
 Here is a diagram that details the formation of branching morphologies: <br>
 ![Ludobots](https://user-images.githubusercontent.com/62350419/225134174-c9be17a4-c1a0-4709-b28b-c4b4843bbc87.gif) <br>
-To view each individiual step, go <a href="https://docs.google.com/presentation/d/1CSIokwxJHgnQZs9IMYF87uhRMNs9nSXAmwOiGw9uZ0Y/edit?usp=sharing">here</a>
+To view each individiual step, go <a href="https://docs.google.com/presentation/d/1CSIokwxJHgnQZs9IMYF87uhRMNs9nSXAmwOiGw9uZ0Y/edit?usp=sharing">here</a>.
 
 ### Encoding Brains and Bodies
 In 
