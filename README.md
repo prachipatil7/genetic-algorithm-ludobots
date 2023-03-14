@@ -61,7 +61,7 @@ In order to peform mutations and simulate inheritance, we need a way of encoding
 Below are some examples of how these encodings can vary between different bots:
 | Description | Snake Example | Branching Example |
 | --- | --- | --- |
-Bot | <img width="308" alt="Screen Shot 2023-03-14 at 16 53 47" src="https://user-images.githubusercontent.com/62350419/225148908-b65f53dc-1b0f-40ca-9056-2de73d2bdb2a.png"> | |
+Bot | <img width="294" alt="Screen Shot 2023-03-14 at 17 05 50" src="https://user-images.githubusercontent.com/62350419/225156563-f1f5604d-9f24-465d-ba68-e1c83ab9b4af.png">| |
 Body Encoding |<img width="158" alt="Screen Shot 2023-03-14 at 17 08 23" src="https://user-images.githubusercontent.com/62350419/225156195-761086de-a089-4499-9e38-983645089267.png">| |
 Brain Encoding |<img width="263" alt="Screen Shot 2023-03-14 at 17 27 45" src="https://user-images.githubusercontent.com/62350419/225156272-595f84b1-7a5a-4285-b594-2d38330c6cc0.png">| |
 Brain Weights | [[-0.45354025 -0.83160303]<br>[ 0.05263387 -0.15952745]<br>[ 0.26243147  0.55974003]<br>[-0.44464739  0.137477  ]]| |
