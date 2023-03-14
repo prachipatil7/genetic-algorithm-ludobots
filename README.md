@@ -35,7 +35,9 @@ Snake bodies are generated with the following algorithm:
 2. For each link, keep track of the position of the parent link to calculate the position of the current link. Each link has random dimensions
 
 Here is a diagram that details the formation of snake morphologies: <br>
-[Diagram]
+![Ludobots_Snake](https://user-images.githubusercontent.com/62350419/225140250-4a880f36-d427-4ae9-a922-b38d4e771782.gif)
+To view each individiual step, go <a href="https://docs.google.com/presentation/d/1QkJtwHdYPnikls9h9UAA4g4Sdw-xNyHXVw-yOt0FwVg/edit?usp=sharing">here</a>
+
 #### Branching Bodies
 Branching bodies are generated with the following algorithm:
 1. Randomly choose a length (3-4 links)
