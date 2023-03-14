@@ -23,12 +23,11 @@ These simulations take place in a world with just a single plane and standard Ea
 <img width="736" alt="Screen Shot 2023-03-14 at 13 08 08" src="https://user-images.githubusercontent.com/62350419/225098333-f4893750-cb20-4cce-b0c7-809f19e552dc.png">
 
 Because the morphologies are randomly generated at times, I had to make sure that they do not build themselves through or under the plane. To avoid this, the bots are built in the air, and then fall to the plane due to gravitational force. <br>
-*Here is a new robot being built in midair:* <br>
+*Here is a new robot being built in midair, then moving on the plane:* <br>
 ![ezgif com-optimize](https://user-images.githubusercontent.com/62350419/225100376-5d9d6a29-3ff2-47ed-a286-910ff500efd4.gif)
 
-
 ## Installation and Viewing the Simulations
-In order to experience the simulations, please pull this branch (s-final). <br>
+In order to experience the simulations from this study for yourself, please pull this branch (s-final). <br>
 Then, run the following:
 ```
 pip install -r requirements.txt
