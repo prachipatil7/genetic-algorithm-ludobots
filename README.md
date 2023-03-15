@@ -102,8 +102,9 @@ Once we have a fitness score for a bot, we need replicate the process of evoluti
 
 
 ## The Experiment
+Now that we have talked aboutu the basics of simulating and evolving bots, we are ready to test stuff out. In this section, I will go through the layout of the study that I did. 
 ### Hypothesis
-Since it seems like the starting body is some indicator of how effective evolution will be, I will be testing the following hypotheses:
+As I was running evolutions with random morphologies, it seemed like the starting body is some indicator of how effective evolution will be. This observation made me come up with the following hypotheses to test: 
 1. **It is more efficient to start off with a simple body and let the algorithm evolve its appendages, rather than starting out with a complex body with many parts.**
 2. **Simpler bodies have higher fitness overall.**
 
@@ -113,11 +114,10 @@ The experiment is inspired by a phenomenon from the natural world. Simple organi
 
 In the field of Artificial Life, this experiment could be important for determining more effective seeds for evolutionary algorithms. Even if the goal is to evolve complex behavior, it could be more beneficial for the algorithm to generate the complexity, rather than giving it an already-complex form to optimize. 
 
-[Diagram]
+<img width="739" alt="Screen Shot 2023-03-14 at 21 48 40" src="https://user-images.githubusercontent.com/62350419/225192338-e0ed4e13-92b7-4c2d-9cf5-ff7a3bda9297.png">
 
 ### Method
 In order to test this hypothesis, I created 2 groups for testing. The A group comprised of bots that had a starting morphology of a 1D snake. The B group consisted of bots that had a complex, branching starting morphology. Each group had 5 seed rounds consisting of 10 parents each, which evolved for 500 generations. Through this method, each group had 50 "species" generated. 
-
 
 In order to generate the two different groups, the following changes were made. First, the first half of the rounds were named "snake", and the other half were named "random".
 
