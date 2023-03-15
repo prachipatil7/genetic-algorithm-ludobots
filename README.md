@@ -169,7 +169,7 @@ To investigate this hypothesis, I plotted the initial and final sizes with the f
 ![InitialSize_FinalFitness](https://user-images.githubusercontent.com/62350419/224893739-a3b5a561-1b0f-4ab1-9ceb-1eff6212203d.png)
 ![FinalSize_FinalFitness](https://user-images.githubusercontent.com/62350419/224893743-e882f210-6a45-46f7-a8fd-d608d519e674.png) <br>
 
-In all three figures, we can see that the fitted line always has a slight downward trend. This supports the fact that not only do simpler starting bodies lead to higher fitness, but also that simpler final bodies also lead to higher fitness. Therefore, there seems to be evidence to support that simpler bots have higher fitness in general.
+In both figures, we can see that the fitted line always has a slight downward trend. This supports the fact that not only do simpler starting bodies lead to higher fitness, but also that simpler final bodies also lead to higher fitness. Therefore, there seems to be evidence to support that simpler bots have higher fitness in general.
 
 ### Summary Video
 The results of this study can be further seen in the video below:
