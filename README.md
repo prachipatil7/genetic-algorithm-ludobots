@@ -67,7 +67,18 @@ Brain Encoding |<img width="263" alt="Screen Shot 2023-03-14 at 17 27 45" src="h
 Brain Weights | [[-0.45354025 -0.83160303]<br>[ 0.05263387 -0.15952745]<br>[ 0.26243147  0.55974003]<br>[-0.44464739  0.137477  ]]|[[ 0.65627626  0.59513052 -0.53186706 0.56924339 -0.68057246]<br>[-0.2664973  -0.45951583  0.62196881 -0.55375614  0.47363302]<br>[ 0.52664633  0.01426278  0.39802324 -0.09011762  0.56240639]<br>[ 0.47675202  0.68858778  0.49884554 -0.17353249 -0.52853125]<br>[-0.59335982 -0.96442452 -0.69991917 -0.04104824  0.27055461]<br>[-0.6209788  -0.31870314  0.8402951 -0.62298069 -0.13438554]<br>[-0.04396371 -0.07212602  0.96930183 -0.02911747  0.07195371]<br>[ 0.32499243  0.37942723  0.57721341 -0.13288538 -0.63241947]<br>[ 0.38019559 -0.54588349  0.54491643 0.72398227 -0.44366646]<br>[-0.84768468 -0.52794184  0.98775288 -0.46475363 -0.80020829]<br>[-0.04221524 -0.29335501 -0.21383727  0.35334978  0.09856925]<br>[ 0.52298143  0.19989618  0.52376507 -0.13227678 -0.95953027]]|
 
 ### Mutating Bodies and Brains
+Once the different morphologies are created, they must be evolved! There are three types of changes that can be made to a bot during the evolutioinary process:
+1. Change synapse weights
+2. Add a link
+3. Change a link
 
+Here is an example of how these three mutation types can work together to evolve a bot:
+| Generation | Mutation | Bot | Morphology | Brain | Weights | Fitness |
+| --- | --- | --- | --- | --- | --- | --- |
+||
+||
+||
+||
 ### Fitness and Selection
 
 ## The Experiment
@@ -85,6 +96,23 @@ In the field of Artificial Life, this experiment could be important for determin
 [Diagram]
 
 ### Method
+In order to test this hypothesis, I created 2 groups for testing. The A group comprised of bots that had a starting morphology of a 1D snake. The B group consisted of bots that had a complex, branching starting morphology. Each group had 5 seed rounds consisting of 10 parents each, which evolved for 500 generations. Through this method, each group had 50 "species" generated. 
+
+
+In order to generate the two different groups, the following changes were made. First, the first half of the rounds were named "snake", and the other half were named "random".
+
+From `search.py` L8-9:
+```
+phc_lst = [PARALLEL_HILL_CLIMBER(i, "snake") for i in range(int(c.numberOfSeeds/2))]
+phc_lst += [PARALLEL_HILL_CLIMBER(int(i+c.numberOfSeeds/2), "random") for i in range(int(c.numberOfSeeds/2))]
+for phc in phc_lst:
+```
+Second, the snake rounds eliminated the chance of branching so as to only generate the bot along a single dimension.
+
+From `solution.py` L134:
+```
+liklihoodOfBranching= 0 if self.seedType == "snake" else 3/self.numTorsoLinks
+```
 
 
 ### Results
