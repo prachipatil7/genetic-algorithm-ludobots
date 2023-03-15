@@ -174,8 +174,14 @@ In both figures, we can see that the fitted line always has a slight downward tr
 
 ### Summary Video
 The results of this study can be further seen in the video below: <br>
-https://user-images.githubusercontent.com/62350419/225210697-14d2e9b2-8db2-4ba4-8149-527cfccf4995.mp4
 https://youtu.be/FpmQrnR3f40 
+
+## Discussion and Further Analysis
+Overall, it seems that smaller bots are better suited for evolutionary algorithms. They are able to find beneficial mutations much quicker than complex creatures. Even after evolution, it seems like smaller bots are still more fit. This is good news if we are wanting to bring our evolved robots into the real world, as they will require less materials and engineering to build, and they will be much more effective. Even though they might not look as cool, little bots are the way to go!
+
+<img width="409" alt="Screen Shot 2023-03-15 at 00 02 48" src="https://user-images.githubusercontent.com/62350419/225211634-f0ffae23-6d49-4fc2-b629-e2321b73c4e5.png">
+
+If I had more time, I would investigate how changing the motor strength to be a function of the number of links might impact these results.
 
 ## Installation and Viewing the Simulations
 Excited to poke around in the simulations? You're in luck! <br>
