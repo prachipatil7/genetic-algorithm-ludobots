@@ -70,7 +70,7 @@ Brain Weights | [[-0.45354025 -0.83160303]<br>[ 0.05263387 -0.15952745]<br>[ 0.2
 Once the different morphologies are created, they must be evolved! There are three types of changes that can be made to a bot during the evolutioinary process:
 1. Change synapse weights
 2. Add a link
-3. Change a link (change dimensions or sensor status)
+3. Change a link (change dimensions and/or sensor status)
 
 Here is an example of how these three mutation types can work together to evolve a bot:
 | Gen | Mut | Bot | Body | Brain | Weights | Fit |
@@ -81,7 +81,24 @@ Here is an example of how these three mutation types can work together to evolve
 |56|Change Link|![ezgif com-video-to-gif (2)](https://user-images.githubusercontent.com/62350419/225183110-6db04bee-85fa-4645-acca-e0d321c2adf8.gif)|<img width="254" alt="Screen Shot 2023-03-14 at 20 49 01" src="https://user-images.githubusercontent.com/62350419/225183664-4c64a2f6-b488-4f91-a5a6-2aed2e88c09b.png"> | <img width="170" alt="Screen Shot 2023-03-14 at 20 51 44" src="https://user-images.githubusercontent.com/62350419/225184081-4552dedf-af73-41bf-9b10-ac6b0704c5bf.png">|<img width="389" alt="Screen Shot 2023-03-14 at 20 50 14" src="https://user-images.githubusercontent.com/62350419/225183885-54981d86-24f1-41ac-ad36-4e2b4d6c964d.png"> | -1.888|
 |115|Add Link| ![ezgif com-video-to-gif (3)](https://user-images.githubusercontent.com/62350419/225184800-50a1e5bb-4caf-46f8-a98f-bdd4d572c615.gif)|<img width="263" alt="Screen Shot 2023-03-14 at 21 00 29" src="https://user-images.githubusercontent.com/62350419/225185294-da6f0f4e-2c3b-46cf-9c1b-dbc470b7d518.png">| <img width="148" alt="Screen Shot 2023-03-14 at 21 01 35" src="https://user-images.githubusercontent.com/62350419/225185443-ee989a5c-6bb5-4608-afdc-8a631cceb7bb.png">| <img width="389" alt="Screen Shot 2023-03-14 at 21 03 11" src="https://user-images.githubusercontent.com/62350419/225185689-0f4831e5-f589-47a3-b0b8-c70e6ad06008.png">|-4.554|
 |252|Change Link| ![ezgif com-video-to-gif (4)](https://user-images.githubusercontent.com/62350419/225186681-16a4fe7b-d060-40b1-95ee-beab443767d8.gif)|<img width="263" alt="Screen Shot 2023-03-14 at 21 00 29" src="https://user-images.githubusercontent.com/62350419/225185294-da6f0f4e-2c3b-46cf-9c1b-dbc470b7d518.png">| <img width="148" alt="Screen Shot 2023-03-14 at 21 01 35" src="https://user-images.githubusercontent.com/62350419/225185443-ee989a5c-6bb5-4608-afdc-8a631cceb7bb.png">| <img width="389" alt="Screen Shot 2023-03-14 at 21 03 11" src="https://user-images.githubusercontent.com/62350419/225185689-0f4831e5-f589-47a3-b0b8-c70e6ad06008.png">|-5.049|
+
+No further beneficial mutations were found. 2 links were added, 2 links were changed and 1 weight was changed. 
+
 ### Fitness and Selection
+As we are mutating our organisms, we must find a way to select which versions of our organism are better than others. This is where the **fitness function** comes it. The fitness function measures the performance of a bot and reduces it down to a single number. In our case, the fitness function is the average x position of all of the links in the bot. The more negative the fitness is, the further "into" the screen it has moved. 
+The fitness is calculated in `robot.py`:
+```
+xCoors = []
+for i in range(len(self.sensors)-1):
+    stateOfLink = p.getLinkState(self.robotId,i)
+    positionOfLink = stateOfLink[0]
+    xCoordinateOfLink = positionOfLink[0]
+    xCoors.append(xCoordinateOfLink)
+fitness = sum(xCoors)/len(xCoors)
+```
+Once we have a fitness score for a bot, we need replicate the process of evolution. This is where the **evolutionary algorithm** is used. The evolutionary algorithm that is used is a **parallel hill climber**. Parallel hill climber works by randomly applying one of the mutations discussed above to a bot to create a child bot. Then, the child's fitness is compared with the parent's fitness. If the child has a better fitness, it will be the parent of the next generation. If not, the current parent will continue being the parent. Here is an illustration of the process for 1 generation for a population size of 4.
+
+<img width="759" alt="Screen Shot 2023-03-14 at 21 41 27" src="https://user-images.githubusercontent.com/62350419/225191291-306a3ad1-5857-4056-87b8-639a720b4a05.png">
 
 
 ## The Experiment
