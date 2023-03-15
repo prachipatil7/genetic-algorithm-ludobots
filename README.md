@@ -151,23 +151,28 @@ liklihoodOfBranching= 0 if self.seedType == "snake" else 3/self.numTorsoLinks
 As all 50,000 simulations ran, the body size and fitness of each generation was saved so it could be analyzed. 
 
 ### Results
-Line Chart
+#### Hypothesis 1: It is more efficient to start off with a simple body and let the algorithm evolve its appendages, rather than starting out with a complex body with many parts
+In order to draw conclusions about this hypothesis, I analyzed the two groups based on their final fitness scores. Overall, I found that the bots that had a simple snake starting morphology had overall better fitness than those that started with complex morphologies. This can be seen in the following two figures. 
+<br>
 ![AB_LineChart](https://user-images.githubusercontent.com/62350419/224893662-0a3eb833-318e-4e85-996e-0caa6b882105.png)
-
-Box Plot
 ![AB_BoxPlot](https://user-images.githubusercontent.com/62350419/224893693-05396daf-3b3a-4fab-b9e9-7f715e9a6a75.png)
-
-![InitialSize_InitialFitness](https://user-images.githubusercontent.com/62350419/224893731-af051325-bb9a-4256-b317-6b12da02284e.png)
-![InitialSize_FinalFitness](https://user-images.githubusercontent.com/62350419/224893739-a3b5a561-1b0f-4ab1-9ceb-1eff6212203d.png)
-![FinalSize_FinalFitness](https://user-images.githubusercontent.com/62350419/224893743-e882f210-6a45-46f7-a8fd-d608d519e674.png)
-
+<br>
+Therefore, for hypothesis 1, I will say that starting out with simple morphologies and letting the algorithm develop complexity is a more effective way to evolve locomotive functionality than starting with an already complex bot. The statistics breakdown below shows that both groups have similar standard deviations, meaning they follow similar distributions. However, the Snake Start group has a much higher mean and median, which adds even more evidence in favor of this hypothesis. 
 
 | Morphology | Mean | Median | Std Dev |
 | --- | --- | --- | --- |
 | Snake Start | 5.40883 | 4.92252 | 1.90786 |
 | Random Start | 3.73603 | 3.53816 | 1.95109 |
 
+#### Hypothesis 2: Simpler bodies have higher fitness overall.
+To investigate this hypothesis, I plotted the initial and final sizes with the final fitnesses: <br>
+![InitialSize_FinalFitness](https://user-images.githubusercontent.com/62350419/224893739-a3b5a561-1b0f-4ab1-9ceb-1eff6212203d.png)
+![FinalSize_FinalFitness](https://user-images.githubusercontent.com/62350419/224893743-e882f210-6a45-46f7-a8fd-d608d519e674.png) <br>
+
+In all three figures, we can see that the fitted line always has a slight downward trend. This supports the fact that not only do simpler starting bodies lead to higher fitness, but also that simpler final bodies also lead to higher fitness. Therefore, there seems to be evidence to support that simpler bots have higher fitness in general.
+
 ### Summary Video
+The results of this study can be further seen in the video below:
 
 ### Further Study
 
