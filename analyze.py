@@ -154,7 +154,7 @@ def find_best():
     dfs = a + b
     for df in dfs:
         cols.append(df.iloc[-1].values.argmin())
-    print( cols)
+    print(cols)
 
 
 find_best()

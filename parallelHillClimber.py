@@ -25,6 +25,7 @@ class PARALLEL_HILL_CLIMBER:
             #[initial size, initial fitness, final size, final fitness]
 
     def Evolve(self):
+        input("Start Initial Simulation")
         self.Evaluate(self.parents, "GUI")
         for key in self.parents:
             self.bodySizeMetrics[key][0] = len(self.parents[key].linkDict)
@@ -32,6 +33,7 @@ class PARALLEL_HILL_CLIMBER:
             self.Save_Body_Brain("First", self.parents[key].myID, key)
             self.Save_Body_Brain("Best", self.parents[key].myID, key)
         for currentGeneration in range(c.numberOfGenerations):
+            # input("Evolve Next")
             os.system("rm generation/brain*.nndf")
             os.system("rm generation/body*.urdf")
             print(f"------GENERATION {currentGeneration+1}-------")
@@ -89,6 +91,8 @@ class PARALLEL_HILL_CLIMBER:
             if self.parents[key].fitness > best_child.fitness:
                 self.parents[key] = best_child
                 self.Save_Body_Brain("Best", self.parents[key].myID, key)
+                input("Show Beneficial Mutation Simulation")
+                os.system(f"python3 simulate.py GUI {100} save/{self.seedType}{0}_Best{0} 2&>1")
             self.epochMetrics[key].append(self.parents[key].fitness)
              
     def Save_Best(self):

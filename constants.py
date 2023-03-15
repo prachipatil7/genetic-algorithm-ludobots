@@ -3,10 +3,10 @@ motor_max_force = 80
 sleep_time = 1/2000
 gravity = -9.8
 
-numberOfGenerations = 500
+numberOfGenerations = 1
 populationSize = 10
 childrenPerParent = 1
-numberOfSeeds = 10
+numberOfSeeds = 2
 
 motorJointRange = 0.5
 maxLinks = 10

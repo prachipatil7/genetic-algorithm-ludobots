@@ -41,8 +41,8 @@ def run_best():
         
 
 def run_mini_evolution(seedType):
-    c.populationSize = 2
-    c.numberOfGenerations = 5
+    c.populationSize = 1
+    c.numberOfGenerations = 500
     c.numberOfSeeds = 1
     phc = PARALLEL_HILL_CLIMBER(0, seedType)
     phc.Evolve()
@@ -89,7 +89,8 @@ while True:
         seed = "snake" if seedChoice=="S" else "random"
         print("Starting Evolution...")
         run_mini_evolution(seed)
-        for parentID in range(2):
+        input("Run Final Simulation")
+        for parentID in range(1):
             os.system(f"python3 simulate.py GUI {parentID} save/{seed}{0}_Best{parentID} 2&>1")
     elif choice == "5":
         print("Thanks for visiting!")

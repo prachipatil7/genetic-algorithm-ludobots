@@ -69,13 +69,6 @@ class SOLUTION:
 
     def Create_World(self):
         pyrosim.Start_SDF(f"generation/world.sdf")
-
-        # length, width, height = 1, 1, 1
-        # xpos, ypos, zpos = -3, 3, 0.5
-        # pyrosim.Send_Cube(name=f"Box", 
-                        #   pos=[xpos, ypos, zpos] , 
-                        #   size=[length, width, height])
-
         pyrosim.End()
 
     def create_root_link(self, root_link=None):
@@ -159,7 +152,8 @@ class SOLUTION:
         self.numSensorNeurons = len(self.sensorNeurons)
         self.numMotorNeurons = len(self.motorNeurons)
         self.weights = np.random.rand(self.numSensorNeurons,self.numMotorNeurons) * 2 - 1
-        # print("synapse_weights: ", self.weights)
+        print("synapse_weights: ")
+        print(self.weights)
         pyrosim.Start_NeuralNetwork(f"generation/brain{self.myID}.nndf")
 
         i=0
