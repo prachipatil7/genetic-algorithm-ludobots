@@ -86,6 +86,7 @@ No further beneficial mutations were found. 2 links were added, 2 links were cha
 
 ### Fitness and Selection
 As we are mutating our organisms, we must find a way to select which versions of our organism are better than others. This is where the **fitness function** comes it. The fitness function measures the performance of a bot and reduces it down to a single number. In our case, the fitness function is the average x position of all of the links in the bot. The more negative the fitness is, the further "into" the screen it has moved. 
+
 The fitness is calculated in `robot.py`:
 ```
 xCoors = []
@@ -100,6 +101,16 @@ Once we have a fitness score for a bot, we need replicate the process of evoluti
 
 <img width="759" alt="Screen Shot 2023-03-14 at 21 41 27" src="https://user-images.githubusercontent.com/62350419/225191291-306a3ad1-5857-4056-87b8-639a720b4a05.png">
 
+The selection is done in `parallelHillClimber.py`:
+```
+for key in self.parents:
+    best_child = self.children[key][0]
+    for childkey, curr_child in self.children[key].items():
+        if best_child.fitness > curr_child.fitness:
+            best_child = curr_child
+    if self.parents[key].fitness > best_child.fitness:
+        self.parents[key] = best_child
+```
 
 ## The Experiment
 Now that we have talked aboutu the basics of simulating and evolving bots, we are ready to test stuff out. In this section, I will go through the layout of the study that I did. 
@@ -121,6 +132,9 @@ In order to test this hypothesis, I created 2 groups for testing. The A group co
 
 In order to generate the two different groups, the following changes were made. First, the first half of the rounds were named "snake", and the other half were named "random".
 
+**Snake**:<br><img width="321" alt="Screen Shot 2023-03-14 at 21 46 26" src="https://user-images.githubusercontent.com/62350419/225192926-df5ec823-ba66-4948-b3d1-e774fb2deab6.png"><br>
+**Random**:<br><img width="318" alt="Screen Shot 2023-03-14 at 21 47 04" src="https://user-images.githubusercontent.com/62350419/225192975-d2a65fb0-ef6b-4b1d-8b03-a93c128e7ec9.png"><br>
+
 From `search.py` L8-9:
 ```
 phc_lst = [PARALLEL_HILL_CLIMBER(i, "snake") for i in range(int(c.numberOfSeeds/2))]
@@ -134,6 +148,7 @@ From `solution.py` L134:
 liklihoodOfBranching= 0 if self.seedType == "snake" else 3/self.numTorsoLinks
 ```
 
+As all 50,000 simulations ran, the body size and fitness of each generation was saved so it could be analyzed. 
 
 ### Results
 Line Chart
