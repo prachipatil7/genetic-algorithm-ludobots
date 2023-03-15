@@ -70,16 +70,20 @@ Brain Weights | [[-0.45354025 -0.83160303]<br>[ 0.05263387 -0.15952745]<br>[ 0.2
 Once the different morphologies are created, they must be evolved! There are three types of changes that can be made to a bot during the evolutioinary process:
 1. Change synapse weights
 2. Add a link
-3. Change a link
+3. Change a link (change dimensions or sensor status)
 
 Here is an example of how these three mutation types can work together to evolve a bot:
-| Generation | Mutation | Bot | Morphology | Brain | Weights | Fitness |
+| Gen | Mut | Bot | Body | Brain | Weights | Fit |
 | --- | --- | --- | --- | --- | --- | --- |
-||
-||
-||
-||
+|0|Start|![ezgif com-optimize (1)](https://user-images.githubusercontent.com/62350419/225178722-3ca63c93-d45f-446a-a6c3-f84cd0358927.gif)| <img width="180" alt="Screen Shot 2023-03-14 at 20 17 10" src="https://user-images.githubusercontent.com/62350419/225179203-b16df3bc-755b-44d0-b295-043229a0a869.png"> |<img width="199" alt="Screen Shot 2023-03-14 at 20 24 37" src="https://user-images.githubusercontent.com/62350419/225180112-7ce783e5-944e-4ca8-845d-a9047faa3c76.png"> | <img width="256" alt="Screen Shot 2023-03-14 at 20 31 28" src="https://user-images.githubusercontent.com/62350419/225181043-a01d5e1d-3ae4-41e5-879c-42defdff813a.png">| -0.457 |
+|1|Change Weights| ![ezgif com-video-to-gif](https://user-images.githubusercontent.com/62350419/225180514-8ff44716-b1aa-47fb-b403-babc278421a2.gif)|<img width="180" alt="Screen Shot 2023-03-14 at 20 17 10" src="https://user-images.githubusercontent.com/62350419/225179203-b16df3bc-755b-44d0-b295-043229a0a869.png"> |<img width="199" alt="Screen Shot 2023-03-14 at 20 24 37" src="https://user-images.githubusercontent.com/62350419/225180112-7ce783e5-944e-4ca8-845d-a9047faa3c76.png"> | <img width="258" alt="Screen Shot 2023-03-14 at 20 33 22" src="https://user-images.githubusercontent.com/62350419/225181189-fffd4abf-5794-41b0-bbe3-37bfefe1fbac.png">| -1.227|
+|6|Add Link| ![ezgif com-video-to-gif (1)](https://user-images.githubusercontent.com/62350419/225182424-558c3cc9-423f-4c50-a76f-5e1a863a9e5a.gif)|<img width="256" alt="Screen Shot 2023-03-14 at 20 40 43" src="https://user-images.githubusercontent.com/62350419/225182643-d8208fbd-714d-4472-a0cd-0f3aa9559853.png">| <img width="153" alt="Screen Shot 2023-03-14 at 20 41 35" src="https://user-images.githubusercontent.com/62350419/225182747-d1faa48c-e9ae-4d82-b73b-612e6e7d2698.png">| <img width="332" alt="Screen Shot 2023-03-14 at 20 38 15" src="https://user-images.githubusercontent.com/62350419/225182360-2469daf9-4863-4fc8-a012-a4302b4eebda.png">|-1.874|
+|56|Change Link|![ezgif com-video-to-gif (2)](https://user-images.githubusercontent.com/62350419/225183110-6db04bee-85fa-4645-acca-e0d321c2adf8.gif)|<img width="254" alt="Screen Shot 2023-03-14 at 20 49 01" src="https://user-images.githubusercontent.com/62350419/225183664-4c64a2f6-b488-4f91-a5a6-2aed2e88c09b.png"> | <img width="170" alt="Screen Shot 2023-03-14 at 20 51 44" src="https://user-images.githubusercontent.com/62350419/225184081-4552dedf-af73-41bf-9b10-ac6b0704c5bf.png">|<img width="389" alt="Screen Shot 2023-03-14 at 20 50 14" src="https://user-images.githubusercontent.com/62350419/225183885-54981d86-24f1-41ac-ad36-4e2b4d6c964d.png"> | -1.888|
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
 ### Fitness and Selection
+
 
 ## The Experiment
 ### Hypothesis
