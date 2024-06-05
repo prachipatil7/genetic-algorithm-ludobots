@@ -1,4 +1,4 @@
-# Final Project (The Scientist)
+# Effects of Starting Complexity on Genetic Algorithm Fitness Growth
 Over the course of 9 weeks, I have simulated and evolved motor behavior in simple organisms as well as added my own modifications to create and evolve random morphologies. In this process, I have noticed a correlation betweeen body size and final fitness, which I set out to investigate further in this study. 
 
 ![ezgif com-add-text](https://user-images.githubusercontent.com/62350419/225210271-18a1185f-da20-4695-b8ab-6aa5327111e5.gif)
